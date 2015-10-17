@@ -8,9 +8,9 @@ import java.awt.*;
 public class Cell {
 
     private int positionX;
+    private int positionY;
     private int centerX;
     private int centerY;
-    private int positionY;
     private Color color;
 
     public Cell(int posX, int posY, int centX, int centY) {
