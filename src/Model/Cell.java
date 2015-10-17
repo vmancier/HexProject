@@ -8,9 +8,9 @@ import java.awt.*;
 public class Cell {
 
     private int positionX;
+    private int positionY;
     private int centerX;
     private int centerY;
-    private int positionY;
     private Color color;
     Polygon p = new Polygon () ;
     double arc =( Math .PI *2) /6;
