@@ -25,7 +25,7 @@ public class HexView implements Observer {
         hexFrame.add(new JLabel(name), BorderLayout.NORTH);
         //hexFrame.add(displayField, BorderLayout.CENTER);
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //model.addObserver(this);
+        model.addObserver(this);
         hexFrame.pack(); //hexFrame.setSize(200, 100);
         hexFrame.setLocation(posX, posY);
         hexFrame.setVisible(true);
