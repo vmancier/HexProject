@@ -12,13 +12,21 @@ public class Cell {
     private int centerY;
     private int positionY;
     private Color color;
+    Polygon p = new Polygon () ;
+    double arc =( Math .PI *2) /6;
+    double rad;
 
     public Cell(int posX, int posY, int centX, int centY) {
         this.positionX = posX;
         this.positionY = posY;
         this.centerX = centX;
         this.centerY = centY;
+        this.rad = Math.sqrt(Math.pow(positionX-positionY,2)+Math.pow(centerX-centerY,2));
         this.color = Color.gray;
+        for (int i=0; i <=6; i++) {
+            this.p. addPoint (( int) Math . round ( centerX +rad* Math .cos(arc*i) ) ,
+                    (int) Math . round ( centerY +rad* Math .sin(arc*i) ) ) ;
+        }
     }
 
     public int getCenterX() {

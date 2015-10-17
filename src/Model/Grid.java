@@ -5,11 +5,15 @@ package Model;
  */
 public class Grid {
     private Cell[][] matrix;
+    private int rows;
+    private int columns;
 
-    public Grid() {
-        this.matrix = new Cell[7][7];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
+    public Grid(int rows,int columns) {
+        this.rows =rows;
+        this.columns =columns;
+        this.matrix = new Cell[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
                 matrix[i][j] = new Cell(i, j, i, j);
                 System.out.println(matrix[i][j]);
             }
