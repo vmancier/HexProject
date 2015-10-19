@@ -24,11 +24,7 @@ public class Grid {
         }
     }
 
-    public void displayGrid(Graphics g) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                matrix[i][j].displayCell(g);
-            }
-        }
+    public Cell[][] getMatrix() {
+        return matrix;
     }
 }

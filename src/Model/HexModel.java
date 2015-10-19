@@ -13,8 +13,7 @@ public class HexModel extends Observable {
         gridHex = new Grid();
     }
 
-    public void displayHex(Graphics g) {
-        gridHex.displayGrid(g);
+    public Grid getGridHex() {
+        return gridHex;
     }
-
 }
