@@ -22,13 +22,30 @@ public class HexView implements Observer {
         this.model = model;
         this.controller = controller;
         hexFrame = new JFrame(name);
-        hexFrame.add(new JLabel(name), BorderLayout.NORTH);
-        //hexFrame.add(displayField, BorderLayout.CENTER);
+
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         model.addObserver(this);
-        hexFrame.pack(); //hexFrame.setSize(200, 100);
+
+        hexFrame.add(displayPanel(model));
+
+        hexFrame.setSize(800, 600);
         hexFrame.setLocation(posX, posY);
         hexFrame.setVisible(true);
+
+
+    }
+
+    public JPanel displayPanel(HexModel m)
+    {
+        JPanel p = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                m.displayHex(g);
+            }
+
+        };
+        return p;
     }
 
     @Override
