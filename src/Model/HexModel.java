@@ -10,7 +10,7 @@ public class HexModel extends Observable {
     Grid gridHex;
 
     public HexModel(){
-        gridHex = new Grid(5,5);
+        gridHex = new Grid();
     }
 
     public void displayHex(Graphics g) {
