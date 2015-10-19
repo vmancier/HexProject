@@ -15,8 +15,7 @@ public class Cell {
     Polygon p = new Polygon () ;
     double arc =( Math .PI *2) /6;
     double rad;
-    //int x[] = {20, 30, 50, 60, 60, 50, 30, 20};
-    //int y[] = {30, 20, 20, 30, 50, 60, 60, 50};
+
 
 
     public Cell(int posX, int posY, int centX, int centY) {
