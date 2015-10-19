@@ -75,7 +75,7 @@ public class Cell {
     }
 
     public void displayCell(Graphics g) {
-        //g.fillPolygon(x, y, 8);
+
         g.fillPolygon(p);
     }
 }

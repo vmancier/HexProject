@@ -22,8 +22,6 @@ public class ModelTest {
         JFrame jf = new  JFrame();
         Grid g = new Grid(5,5);
         assertEquals(true,g.displayGrid(jf.getGraphics()));
-    }*/
-
-
-
+    }
+    */
 }
