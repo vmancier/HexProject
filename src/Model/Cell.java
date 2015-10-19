@@ -13,7 +13,7 @@ public class Cell {
     private int centerY;
     private Color color;
     Polygon p = new Polygon () ;
-    double arc =( Math .PI *2) /6;
+    double arc =( Math .PI *2)/6;
     double rad;
 
     public Cell(int posX, int posY, int centX, int centY) {

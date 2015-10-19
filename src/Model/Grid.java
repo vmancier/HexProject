@@ -1,5 +1,7 @@
 package Model;
 
+import Application.Entities;
+
 /**
  * Created by Eliott on 14/10/2015.
  */
@@ -8,9 +10,9 @@ public class Grid {
     private int rows;
     private int columns;
 
-    public Grid(int rows,int columns) {
-        this.rows =rows;
-        this.columns =columns;
+    public Grid() {
+        this.rows = Entities.ROWS_NUMBER;
+        this.columns = Entities.COLUMNS_NUMBER;
         this.matrix = new Cell[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
