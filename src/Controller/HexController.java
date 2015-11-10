@@ -18,4 +18,17 @@ public class HexController {
     {
         this.view = view;
     }
+
+    public void switchPlayer() {
+        if (HexModel.getCurrentPlayer() == HexModel.getPlayer1()) {
+            HexModel.getPlayer1().setIsPlaying(false);
+            HexModel.setCurrentPlayer(HexModel.getPlayer2());
+            HexModel.getPlayer2().setIsPlaying(true);
+        }
+        else {
+            HexModel.getPlayer2().setIsPlaying(false);
+            HexModel.setCurrentPlayer((HexModel.getPlayer1()));
+            HexModel.getPlayer1().setIsPlaying(true);
+        }
+    }
 }
