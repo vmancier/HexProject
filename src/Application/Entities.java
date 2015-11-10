@@ -12,7 +12,7 @@ public class Entities {
     public static final int ROWS_NUMBER = 7;
     public static final int COLUMNS_NUMBER = 7;
 
-    public static final Color EMPTY_COLOR = Color.gray;
+    public static final Color EMPTY_COLOR = Color.lightGray;
     public static final Color PLAYER1_COLOR = Color.red;
     public static final Color PLAYER2_COLOR = Color.blue;
 

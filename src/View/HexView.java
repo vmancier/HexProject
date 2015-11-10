@@ -44,6 +44,9 @@ public class HexView implements Observer {
         JPanel p = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
+                paintComponent((Graphics2D) g);
+            }
+            protected void paintComponent(Graphics2D g){
                 super.paintComponent(g);
                 displayGrid(g, m);
             }
@@ -56,13 +59,20 @@ public class HexView implements Observer {
 
     }
 
-    public void displayGrid(Graphics g, HexModel m) {
+    public void displayGrid(Graphics2D g, HexModel m) {
         Grid tmpGrid = m.getGridHex();
         Cell[][] tmpMatrix = tmpGrid.getMatrix();
-        for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
+        for (int i = 0; i < Entities.ROWS_NUMBER; i++)
             for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
+                g.setColor(Color.black);
+                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                g.drawPolygon(tmpMatrix[i][j]);
+                g.setColor(Entities.EMPTY_COLOR);
+                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.fillPolygon(tmpMatrix[i][j]);
+
             }
-        }
     }
 }
