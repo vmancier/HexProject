@@ -1,5 +1,6 @@
 package Controller;
 
+import Application.Entities;
 import Model.*;
 import View.*;
 
@@ -24,11 +25,17 @@ public class HexController {
             HexModel.getPlayer1().setIsPlaying(false);
             HexModel.setCurrentPlayer(HexModel.getPlayer2());
             HexModel.getPlayer2().setIsPlaying(true);
-        }
-        else {
+        } else {
             HexModel.getPlayer2().setIsPlaying(false);
             HexModel.setCurrentPlayer((HexModel.getPlayer1()));
             HexModel.getPlayer1().setIsPlaying(true);
+        }
+    }
+
+    public void changeCellColor(int i, int j){
+        if (model.getGridHex().getMatrix()[i][j].getColor()== Entities.EMPTY_COLOR)
+        {
+            //model.getGridHex().getMatrix()[i][j].setColor(model.getCurrentPlayer().getColor());
         }
     }
 }
