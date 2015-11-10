@@ -10,15 +10,17 @@ import java.awt.event.MouseEvent;
  * Created by Eliott on 14/10/2015.
  */
 public class Cell extends Polygon {
-
+    private int posX;
+    private int posY;
     private int centerX;
     private int centerY;
     private static Color color;
     double arc =( Math .PI *2)/6;
     double rad;
 
-
-    public Cell(int centX, int centY) {
+    public Cell(int posX, int posY, int centX, int centY) {
+        this.posX= posX;
+        this.posY= posY;
         this.centerX = centX;
         this.centerY = centY;
         this.rad = Entities.CELL_SIZE;
@@ -31,6 +33,13 @@ public class Cell extends Polygon {
         }
     }
 
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
     public int getCenterX() {
         return centerX;
     }

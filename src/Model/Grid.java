@@ -20,7 +20,7 @@ public class Grid {
         this.matrix = new Cell[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                matrix[i][j] = new Cell(Entities.ROW_POS_X *i + Entities.COLUMN_POS_X*j + Entities.GRID_POS_X ,
+                matrix[i][j] = new Cell(i,j,Entities.ROW_POS_X *i + Entities.COLUMN_POS_X*j + Entities.GRID_POS_X ,
                         Entities.COLUMN_POS_Y*j + Entities.ROW_POS_Y*i + Entities.GRID_POS_Y);
 
             }
