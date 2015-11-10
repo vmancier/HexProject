@@ -2,7 +2,6 @@ package Model;
 
 
 import Application.Entities;
-import java.awt.*;
 
 /**
  * Created by Eliott on 14/10/2015.
@@ -18,7 +17,7 @@ public class Grid {
         this.matrix = new Cell[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                matrix[i][j] = new Cell(50.5f*i+10, 50.5f*j, 50*i+50, 50*j+50);
+                matrix[i][j] = new Cell(50*i+50, 50*j+50);
 
                 //System.out.println(matrix[i][j]);
             }
