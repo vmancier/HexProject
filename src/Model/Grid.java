@@ -3,6 +3,9 @@ package Model;
 
 import Application.Entities;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 /**
  * Created by Eliott on 14/10/2015.
  */
@@ -22,6 +25,7 @@ public class Grid {
 
             }
         }
+
     }
 
     public Cell[][] getMatrix() {

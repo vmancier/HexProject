@@ -3,6 +3,8 @@ package Model;
 import Application.Entities;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by Eliott on 14/10/2015.
@@ -19,7 +21,7 @@ public class Cell extends Polygon {
     public Cell(int centX, int centY) {
         this.centerX = centX;
         this.centerY = centY;
-        this.rad = 20;//Math.sqrt(Math.pow(positionX-positionY,2)+Math.pow(centerX-centerY,2));
+        this.rad = Entities.CELL_SIZE;
         this.color = Entities.EMPTY_COLOR;
 
 

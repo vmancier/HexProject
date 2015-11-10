@@ -12,6 +12,8 @@ import Model.HexModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -27,17 +29,31 @@ public class HexView implements Observer {
         this.model = model;
         this.controller = controller;
         hexFrame = new JFrame(name);
+        JPanel pa = displayPanel(model);
 
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         model.addObserver(this);
 
-        hexFrame.add(displayPanel(model));
+        hexFrame.add(pa);
 
         hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
         hexFrame.setLocation(posX, posY);
         hexFrame.setVisible(true);
 
-
+        /*
+        pa.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
+                    for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
+                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
+                            if (model.getGridHex().getMatrix()[i][j].getColor()==Entities.EMPTY_COLOR)
+                        }
+                    }
+                }
+            }
+        });// Evenement qui survient au click
+        */
     }
 
     public JPanel displayPanel(HexModel m) {

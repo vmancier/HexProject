@@ -23,4 +23,6 @@ public class Entities {
     public static final int COLUMN_POS_Y = 18;
     public static final int ROW_POS_X = 32;
     public static final int ROW_POS_Y = -17;
+
+    public static final int CELL_SIZE = 20;
 }
