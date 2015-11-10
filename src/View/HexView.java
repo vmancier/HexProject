@@ -32,8 +32,6 @@ public class HexView implements Observer {
         this.model = model;
         this.controller = controller;
 
-
-
         hexFrame = new JFrame(name);
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_HEIGHT);
@@ -49,7 +47,7 @@ public class HexView implements Observer {
         JPanel pa = displayPanel(model);
         hexFrame.add(pa);
 
-        /*
+
         pa.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
@@ -57,12 +55,15 @@ public class HexView implements Observer {
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
                         if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
                             if (model.getGridHex().getMatrix()[i][j].getColor()==Entities.EMPTY_COLOR)
+                            {
+                                //changer couleur de la cellule pour celle du jouer courant
+                            }
                         }
                     }
                 }
             }
         });// Evenement qui survient au click
-        */
+
     }
 
     public JPanel displayPanel(HexModel m) {
