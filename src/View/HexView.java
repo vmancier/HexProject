@@ -53,10 +53,7 @@ public class HexView implements Observer {
                 for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
                         if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
-                            if (model.getGridHex().getMatrix()[i][j].getColor()==Entities.EMPTY_COLOR)
-                            {
-                                //changer couleur de la cellule pour celle du jouer courant
-                            }
+                            controller.changeCellColor(i,j);
                         }
                     }
                 }

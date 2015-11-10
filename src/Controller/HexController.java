@@ -1,5 +1,6 @@
 package Controller;
 
+import Application.Entities;
 import Model.*;
 import View.*;
 
@@ -17,5 +18,12 @@ public class HexController {
     public void addView(HexView view)
     {
         this.view = view;
+    }
+
+    public void changeCellColor(int i, int j){
+        if (model.getGridHex().getMatrix()[i][j].getColor()== Entities.EMPTY_COLOR)
+        {
+            //model.getGridHex().getMatrix()[i][j].setColor(model.getCurrentPlayer().getColor());
+        }
     }
 }
