@@ -9,8 +9,8 @@ import java.awt.*;
  */
 public class Cell extends Polygon {
 
-    private int positionX;
-    private int positionY;
+    private float positionX;
+    private float positionY;
     private int centerX;
     private int centerY;
     private Color color;
@@ -18,7 +18,7 @@ public class Cell extends Polygon {
     double rad;
 
 
-    public Cell(int posX, int posY, int centX, int centY) {
+    public Cell(float posX, float posY, int centX, int centY) {
         this.positionX = posX;
         this.positionY = posY;
         this.centerX = centX;
@@ -49,19 +49,19 @@ public class Cell extends Polygon {
         this.centerY = centerY;
     }
 
-    public int getPositionX() {
+    public float getPositionX() {
         return positionX;
     }
 
-    public void setPositionX(int positionX) {
+    public void setPositionX(float positionX) {
         this.positionX = positionX;
     }
 
-    public int getPositionY() {
+    public float getPositionY() {
         return positionY;
     }
 
-    public void setPositionY(int positionY) {
+    public void setPositionY(float positionY) {
         this.positionY = positionY;
     }
 
