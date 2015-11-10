@@ -11,7 +11,7 @@ public class HexController {
     private HexView view = null;
 
     public HexController(HexModel m){
-        model =m;
+        model = m;
     }
 
     public void addView(HexView view)
