@@ -11,11 +11,14 @@ import Model.Grid;
 import Model.HexModel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
+
+import static Model.Cell.*;
 
 public class HexView implements Observer {
     private String name;
@@ -28,17 +31,23 @@ public class HexView implements Observer {
         this.name = name;
         this.model = model;
         this.controller = controller;
-        hexFrame = new JFrame(name);
-        JPanel pa = displayPanel(model);
 
+
+
+        hexFrame = new JFrame(name);
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_HEIGHT);
+        hexFrame.setLocation(posX, posY);
+        //hexFrame.setLayout(null);
         model.addObserver(this);
 
-        hexFrame.add(pa);
 
         hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
         hexFrame.setLocation(posX, posY);
         hexFrame.setVisible(true);
+
+        JPanel pa = displayPanel(model);
+        hexFrame.add(pa);
 
         /*
         pa.addMouseListener(new MouseAdapter() {
@@ -78,17 +87,18 @@ public class HexView implements Observer {
     public void displayGrid(Graphics2D g, HexModel m) {
         Grid tmpGrid = m.getGridHex();
         Cell[][] tmpMatrix = tmpGrid.getMatrix();
-        for (int i = 0; i < Entities.ROWS_NUMBER; i++)
+        for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
             for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                g.setColor(Color.black);
+                g.setColor(Color.black);    //borders
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.drawPolygon(tmpMatrix[i][j]);
-                g.setColor(Entities.EMPTY_COLOR);
+                g.setColor(getColor());   //filling color
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.fillPolygon(tmpMatrix[i][j]);
 
             }
+        }
     }
 }
