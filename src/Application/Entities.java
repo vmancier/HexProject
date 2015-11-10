@@ -18,15 +18,11 @@ public class Entities {
     public static final Color PLAYER1_COLOR = Color.red;
     public static final Color PLAYER2_COLOR = Color.blue;
 
-    public static final int GRID_POS_X = 25;
-    public static final int GRID_POS_Y = 200;
+    public static final int GRID_POS_X = WINDOW_WIDTH/2-200;
+    public static final int GRID_POS_Y = WINDOW_HEIGHT/2-100;
 
     public static final int COLUMN_POS_X = 31;
     public static final int COLUMN_POS_Y = 18;
     public static final int ROW_POS_X = 31;
     public static final int ROW_POS_Y = -17;
-//    public static final int COLUMN_POS_X = 31;
-//    public static final int COLUMN_POS_Y = 18;
-//    public static final int ROW_POS_X = 32;
-//    public static final int ROW_POS_Y = -17;
 }
