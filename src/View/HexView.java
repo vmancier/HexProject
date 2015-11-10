@@ -15,6 +15,8 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
+import static Model.Cell.*;
+
 public class HexView implements Observer {
     private String name;
     protected HexModel model;
@@ -31,13 +33,13 @@ public class HexView implements Observer {
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         model.addObserver(this);
 
-        hexFrame.add(displayPanel(model));
-
-        hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
+        JPanel pa = displayPanel(model);
+        pa.setLayout(null);
+        pa.setBounds(0, 0, 200, 300);
+        hexFrame.add(pa);
+        hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_HEIGHT);
         hexFrame.setLocation(posX, posY);
         hexFrame.setVisible(true);
-
-
     }
 
     public JPanel displayPanel(HexModel m) {
@@ -62,17 +64,18 @@ public class HexView implements Observer {
     public void displayGrid(Graphics2D g, HexModel m) {
         Grid tmpGrid = m.getGridHex();
         Cell[][] tmpMatrix = tmpGrid.getMatrix();
-        for (int i = 0; i < Entities.ROWS_NUMBER; i++)
+        for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
             for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                g.setColor(Color.black);
+                g.setColor(Color.black);    //borders
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.drawPolygon(tmpMatrix[i][j]);
-                g.setColor(Entities.EMPTY_COLOR);
+                g.setColor(getColor());   //filling color
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.fillPolygon(tmpMatrix[i][j]);
 
             }
+        }
     }
 }

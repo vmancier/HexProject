@@ -11,7 +11,7 @@ public class Main {
     public Main() {
         HexModel hm = new HexModel();
         HexController hc = new HexController(hm);
-        HexView hv = new HexView("Hex Project", hm, hc, 200, 200);
+        HexView hv = new HexView("Hex Project", hm, hc, Entities.WINDOW_POSX, Entities.WINDOW_POSY);
         hc.addView(hv);
     }
 

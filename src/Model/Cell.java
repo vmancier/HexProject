@@ -11,7 +11,7 @@ public class Cell extends Polygon {
 
     private int centerX;
     private int centerY;
-    private Color color;
+    private static Color color;
     double arc =( Math .PI *2)/6;
     double rad;
 
@@ -45,7 +45,7 @@ public class Cell extends Polygon {
         this.centerY = centerY;
     }
 
-    public Color getColor() {
+    public static Color getColor() {
         return color;
     }
 
