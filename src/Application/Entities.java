@@ -6,10 +6,14 @@ import java.awt.*;
  * Created by Eliott on 19/10/2015.
  */
 public class Entities {
+    public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final int SCREEN_HEIGHT = (int) SCREEN_SIZE.getHeight();
+    public static final int SCREEN_WIDTH = (int) SCREEN_SIZE.getWidth();
+
     public static final int WINDOW_HEIGHT = 600;
-    public static final int WINDOW_WIDTH = 800;
-    public static final int WINDOW_POSX = 50;
-    public static final int WINDOW_POSY = 50;
+    public static final int WINDOW_WIDTH = 600;
+    public static final int WINDOW_POSX = SCREEN_WIDTH/2 - WINDOW_WIDTH/2;
+    public static final int WINDOW_POSY = SCREEN_HEIGHT/2 - WINDOW_HEIGHT/2;
 
     public static final int ROWS_NUMBER = 7;
     public static final int COLUMNS_NUMBER = 7;

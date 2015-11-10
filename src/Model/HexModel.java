@@ -16,4 +16,5 @@ public class HexModel extends Observable {
     public Grid getGridHex() {
         return gridHex;
     }
+
 }

@@ -32,13 +32,10 @@ public class HexView implements Observer {
         this.model = model;
         this.controller = controller;
 
-
-
         hexFrame = new JFrame(name);
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_HEIGHT);
         hexFrame.setLocation(posX, posY);
-        //hexFrame.setLayout(null);
         model.addObserver(this);
 
 
