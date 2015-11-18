@@ -25,6 +25,7 @@ public class HexView implements Observer {
     protected HexModel model;
     protected HexController controller;
     private JFrame hexFrame;
+    private JPanel pa;
     //private JTextField displayField = new JTextField();
 
     public HexView(String name, HexModel model, HexController controller, int posX, int posY) {
@@ -42,21 +43,27 @@ public class HexView implements Observer {
         hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
         hexFrame.setLocation(posX, posY);
         hexFrame.setVisible(true);
-
-        JPanel pa = displayPanel(model);
+        refresh();
+        //JPanel pa = displayPanel(model);
         hexFrame.add(pa);
 
 
         pa.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
+                System.out.println(arg0.getX());
                 for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
+                        System.out.println(model.getGridHex().getMatrix()[i][j].getCenterX());
+                        if (//model.getGridHex().getMatrix()[i][j].getCenterX()-Entities.CELL_SIZE>=arg0.getX() &&
+                                model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
+                                //model.getGridHex().getMatrix()[i][j].getPosX()<=arg0.getX()+Entities.CELL_SIZE) {
                             controller.changeCellColor(i,j);
+                            pa.repaint();
                         }
                     }
                 }
+                pa.repaint();
             }
         });// Evenement qui survient au click
 
@@ -67,10 +74,12 @@ public class HexView implements Observer {
             @Override
             protected void paintComponent(Graphics g) {
                 paintComponent((Graphics2D) g);
+
             }
             protected void paintComponent(Graphics2D g){
                 super.paintComponent(g);
                 displayGrid(g, m);
+
             }
         };
         return p;
@@ -97,5 +106,10 @@ public class HexView implements Observer {
 
             }
         }
+    }
+
+    public void refresh(){
+       pa = displayPanel(model);
+
     }
 }
