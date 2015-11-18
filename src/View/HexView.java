@@ -11,19 +11,18 @@ import Model.Grid;
 import Model.HexModel;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
-import static Model.Cell.*;
+import static Model.Cell.getColor;
 
 public class HexView implements Observer {
-    private String name;
     protected HexModel model;
     protected HexController controller;
+    private String name;
     private JFrame hexFrame;
     private JPanel pa;
     //private JTextField displayField = new JTextField();
@@ -44,7 +43,7 @@ public class HexView implements Observer {
         hexFrame.setLocation(posX, posY);
         hexFrame.setVisible(true);
         refresh();
-        //JPanel pa = displayPanel(model);
+        //pa = displayPanel(model);
         hexFrame.add(pa);
 
 
@@ -59,7 +58,6 @@ public class HexView implements Observer {
                                 model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
                                 //model.getGridHex().getMatrix()[i][j].getPosX()<=arg0.getX()+Entities.CELL_SIZE) {
                             controller.changeCellColor(i,j);
-                            pa.repaint();
                         }
                     }
                 }
@@ -76,10 +74,12 @@ public class HexView implements Observer {
                 paintComponent((Graphics2D) g);
 
             }
-            protected void paintComponent(Graphics2D g){
+
+            protected void paintComponent(Graphics2D g) {
                 super.paintComponent(g);
                 displayGrid(g, m);
 
+                displayLines(g);
             }
         };
         return p;
@@ -103,13 +103,39 @@ public class HexView implements Observer {
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.fillPolygon(tmpMatrix[i][j]);
-
             }
         }
     }
 
-    public void refresh(){
-       pa = displayPanel(model);
+
+    public void refresh() {
+        pa = displayPanel(model);
+    }
+
+    protected void displayLines(Graphics2D g) {
+        int x1 = 300;
+        int y1 = 80;
+        int x2 = 480;
+        int y2 = 185;
+        int x3 = 480;
+        int y3 = 225;
+        int x4 = 300;
+        int y4 = 325;
+        int x5 = 270;
+        int y5 = 325;
+        int x6 = 90;
+        int y6 = 220;
+        int x7 = 90;
+        int y7 = 180;
+        int x8 = 270;
+        int y8 = 80;
+
+        g.setColor(Color.blue);
+        g.drawLine(x1, y1, x2, y2);
+        g.drawLine(x5, y5, x6, y6);
+        g.setColor(Color.red);
+        g.drawLine(x3, y3, x4, y4);
+        g.drawLine(x7, y7, x8, y8);
 
     }
 }
