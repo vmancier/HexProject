@@ -51,20 +51,19 @@ public class HexView implements Observer {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 System.out.println(arg0.getX());
-                for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
+                for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
                         System.out.println(model.getGridHex().getMatrix()[i][j].getCenterX());
                         if (//model.getGridHex().getMatrix()[i][j].getCenterX()-Entities.CELL_SIZE>=arg0.getX() &&
-                                model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
-                                //model.getGridHex().getMatrix()[i][j].getPosX()<=arg0.getX()+Entities.CELL_SIZE) {
-                            controller.changeCellColor(i,j);
+                                model.getGridHex().getMatrix()[i][j].getCenterX() <= arg0.getX()) {
+                            //model.getGridHex().getMatrix()[i][j].getPosX()<=arg0.getX()+Entities.CELL_SIZE) {
+                            controller.changeCellColor(i, j);
                         }
                     }
                 }
                 pa.repaint();
             }
         });// Evenement qui survient au click
-
     }
 
     public JPanel displayPanel(HexModel m) {
@@ -72,13 +71,11 @@ public class HexView implements Observer {
             @Override
             protected void paintComponent(Graphics g) {
                 paintComponent((Graphics2D) g);
-
             }
 
             protected void paintComponent(Graphics2D g) {
                 super.paintComponent(g);
                 displayGrid(g, m);
-
                 displayLines(g);
             }
         };
@@ -136,6 +133,5 @@ public class HexView implements Observer {
         g.setColor(Color.red);
         g.drawLine(x3, y3, x4, y4);
         g.drawLine(x7, y7, x8, y8);
-
     }
 }
