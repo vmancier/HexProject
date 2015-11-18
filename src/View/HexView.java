@@ -50,18 +50,23 @@ public class HexView implements Observer {
         pa.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                System.out.println(arg0.getX());
+
                 for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                        System.out.println(model.getGridHex().getMatrix()[i][j].getCenterX());
-                        if (//model.getGridHex().getMatrix()[i][j].getCenterX()-Entities.CELL_SIZE>=arg0.getX() &&
-                                model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
+                        //if (//model.getGridHex().getMatrix()[i][j].getCenterX()-Entities.CELL_SIZE>=arg0.getX() &&
+                               // model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
                                 //model.getGridHex().getMatrix()[i][j].getPosX()<=arg0.getX()+Entities.CELL_SIZE) {
+                        //controller.changeCellColor(i,j);
+                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint()))
+                        {
+                            //).getMatrix()[i][j].getCenterX());
                             controller.changeCellColor(i,j);
+                            pa.repaint();
                         }
+
                     }
                 }
-                pa.repaint();
+
             }
         });// Evenement qui survient au click
 
