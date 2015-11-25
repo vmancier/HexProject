@@ -23,16 +23,15 @@ public class HexView implements Observer {
     protected HexController controller;
     private String name;
     private JFrame hexFrame;
-    private JPanel pa;
     private JPanel mainPanel;
-    private JPanel[][] gridPanel;
+    //private JPanel[][] gridPanel;
 
     public HexView(String name, HexModel model, HexController controller, int posX, int posY) {
         this.name = name;
         this.model = model;
         this.controller = controller;
 
-        this.gridPanel = new JPanel[Entities.ROWS_NUMBER][Entities.COLUMNS_NUMBER];
+        //this.gridPanel = new JPanel[Entities.ROWS_NUMBER][Entities.COLUMNS_NUMBER];
         hexFrame = new JFrame(name);
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         hexFrame.setSize(500, 500);
@@ -48,25 +47,11 @@ public class HexView implements Observer {
         mainPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                /*for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
+                for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
+
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                        //if (//model.getGridHex().getMatrix()[i][j].getCenterX()-Entities.CELL_SIZE>=arg0.getX() &&
-                        // model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
-                        //model.getGridHex().getMatrix()[i][j].getPosX()<=arg0.getX()+Entities.CELL_SIZE) {
-                        //controller.changeCellColor(i,j);
                         if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
-                            //).getMatrix()[i][j].getCenterX());
                             controller.changeCellColor(i, j);
-                            pa.repaint();
-                        }
-                    }
-                }*/
-
-                for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
-
-                    for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
-                            controller.changeCellColor(i,j);
                         }
                     }
                 }
@@ -116,10 +101,6 @@ public class HexView implements Observer {
         }
     }
 
-    public void refresh() {
-        pa = displayPanel(model);
-    }
-
     protected void displayBorders(Graphics2D g) {
 
         g.setColor(Color.blue);
@@ -146,5 +127,4 @@ public class HexView implements Observer {
             top2 += 17;
         }
     }
-
 }

@@ -22,7 +22,7 @@ public class HexModel extends Observable {
         player2 = new Player(2);
         currentPlayer = player1;
         gridHex = new Grid();
-        gameLoop();
+        /*gameLoop();*/
     }
 
     public Grid getGridHex() {
@@ -52,7 +52,7 @@ public class HexModel extends Observable {
         }
     }
 
-    public void gameLoop() {
+    /*public void gameLoop() {
         done = true;
         while (!HexModel.getCurrentPlayer().getHasPlayed()) {
             //wait();
@@ -61,7 +61,7 @@ public class HexModel extends Observable {
         //while (!done) {
 
         //}
-    }
+    }*/
 
     public static Player getCurrentPlayer() {
         return currentPlayer;
