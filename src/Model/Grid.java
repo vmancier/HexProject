@@ -30,5 +30,4 @@ public class Grid {
         return matrix;
     }
 
-    public Cell getCell(int i , int j){return matrix[i][j];}
 }

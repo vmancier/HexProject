@@ -48,7 +48,6 @@ public class HexView implements Observer {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
-
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
                         if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
                             controller.changeCellColor(i, j);
@@ -58,8 +57,6 @@ public class HexView implements Observer {
                 mainPanel.repaint();
             }
         });// Evenement qui survient au click
-
-
         hexFrame.setVisible(true);
     }
 
