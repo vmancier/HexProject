@@ -48,7 +48,8 @@ public class HexView implements Observer {
             @Override
             public void mouseClicked(MouseEvent arg0) {
 
-                for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
+                for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
+
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
                         if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
                             controller.changeCellColor(i,j);
@@ -59,6 +60,7 @@ public class HexView implements Observer {
             }
         });// Evenement qui survient au click
 
+
         hexFrame.setVisible(true);
     }
 
@@ -67,7 +69,6 @@ public class HexView implements Observer {
             @Override
             protected void paintComponent(Graphics g) {
                 paintComponent((Graphics2D) g);
-
             }
 
             protected void paintComponent(Graphics2D g) {
@@ -125,7 +126,6 @@ public class HexView implements Observer {
         g.setColor(Color.red);
         g.drawLine(x3, y3, x4, y4);
         g.drawLine(x7, y7, x8, y8);
-
     }
 
 }
