@@ -35,10 +35,11 @@ public class HexController {
     }
 
     public void changeCellColor(int i, int j){
+
         if (model.getGridHex().getMatrix()[i][j].getColor()== Entities.EMPTY_COLOR)
         {
             model.getGridHex().getMatrix()[i][j].setColor(model.getCurrentPlayer().getColor());//model.getCurrentPlayer().getColor());
-
+            switchPlayer();
         }
     }
 }

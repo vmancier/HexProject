@@ -22,13 +22,13 @@ public class Grid {
             for (int j = 0; j < columns; j++) {
                 matrix[i][j] = new Cell(i,j,Entities.ROW_POS_X *i + Entities.COLUMN_POS_X*j + Entities.GRID_POS_X ,
                         Entities.COLUMN_POS_Y*j + Entities.ROW_POS_Y*i + Entities.GRID_POS_Y);
-
             }
         }
-
     }
 
     public Cell[][] getMatrix() {
         return matrix;
     }
+
+    public Cell getCell(int i , int j){return matrix[i][j];}
 }
