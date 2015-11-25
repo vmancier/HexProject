@@ -17,42 +17,38 @@ import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
-import static Model.Cell.getColor;
 
 public class HexView implements Observer {
     protected HexModel model;
     protected HexController controller;
     private String name;
     private JFrame hexFrame;
-    private JPanel pa;/*
-    private JPanel scorePanel;
-    private JTextField score1 = new JTextField();
-    private JTextField score2;
-    */
+    private JPanel pa;
+    private JPanel mainPanel;
+    private JPanel[][] gridPanel;
 
     public HexView(String name, HexModel model, HexController controller, int posX, int posY) {
         this.name = name;
         this.model = model;
         this.controller = controller;
 
+        this.gridPanel = new JPanel[Entities.ROWS_NUMBER][Entities.COLUMNS_NUMBER];
         hexFrame = new JFrame(name);
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_HEIGHT);
+        hexFrame.setSize(500, 500);
         hexFrame.setLocation(posX, posY);
         model.addObserver(this);
 
         hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
         hexFrame.setLocation(posX, posY);
-        hexFrame.setVisible(true);
-        refresh();
-        //pa = displayPanel(model);
-        hexFrame.add(pa);
 
+        mainPanel = displayMainPanel(model);
+        hexFrame.add(mainPanel);
 
-        pa.addMouseListener(new MouseAdapter() {
+        mainPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
+                /*for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
                         //if (//model.getGridHex().getMatrix()[i][j].getCenterX()-Entities.CELL_SIZE>=arg0.getX() &&
                         // model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
@@ -64,12 +60,25 @@ public class HexView implements Observer {
                             pa.repaint();
                         }
                     }
+                }*/
+
+                for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
+
+                    for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
+                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
+                            controller.changeCellColor(i,j);
+                        }
+                    }
                 }
+                mainPanel.repaint();
             }
         });// Evenement qui survient au click
+
+
+        hexFrame.setVisible(true);
     }
 
-    public JPanel displayPanel(HexModel m) {
+    public JPanel displayMainPanel(HexModel m) {
         JPanel p = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -99,7 +108,7 @@ public class HexView implements Observer {
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.drawPolygon(tmpMatrix[i][j]);
-                g.setColor(getColor());   //filling color
+                g.setColor(tmpMatrix[i][j].getColor());   //filling color
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.fillPolygon(tmpMatrix[i][j]);
@@ -107,12 +116,12 @@ public class HexView implements Observer {
         }
     }
 
-
     public void refresh() {
         pa = displayPanel(model);
     }
 
     protected void displayBorders(Graphics2D g) {
+
         g.setColor(Color.blue);
         g.setStroke(new BasicStroke(2));
         int top1 = 0;
@@ -137,4 +146,5 @@ public class HexView implements Observer {
             top2 += 17;
         }
     }
+
 }

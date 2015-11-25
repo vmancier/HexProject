@@ -29,6 +29,8 @@ public class HexModel extends Observable {
         return gridHex;
     }
 
+    public void setColorCell(int i, int j){gridHex.getCell(i,j).setColor(Entities.PLAYER1_COLOR);}
+
 
     public boolean playerWin(){
         boolean win = false;
