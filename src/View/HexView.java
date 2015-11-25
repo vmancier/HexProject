@@ -12,34 +12,37 @@ import Model.HexModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
 
-public class HexView implements Observer {
+public class HexView implements Observer, ActionListener {
     protected HexModel model;
     protected HexController controller;
     private String name;
     private JFrame hexFrame;
+    private JPanel menuPanel;
     private JPanel mainPanel;
-    //private JPanel[][] gridPanel;
+    private JButton playB;
+    private JButton quitB;
 
     public HexView(String name, HexModel model, HexController controller, int posX, int posY) {
         this.name = name;
         this.model = model;
         this.controller = controller;
 
-        //this.gridPanel = new JPanel[Entities.ROWS_NUMBER][Entities.COLUMNS_NUMBER];
         hexFrame = new JFrame(name);
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        hexFrame.setSize(500, 500);
+        hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
         hexFrame.setLocation(posX, posY);
         model.addObserver(this);
 
-        hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
-        hexFrame.setLocation(posX, posY);
+        /*menuPanel = displayMenuPanel(model);
+        hexFrame.add(menuPanel);*/
 
         mainPanel = displayMainPanel(model);
         hexFrame.add(mainPanel);
@@ -60,20 +63,40 @@ public class HexView implements Observer {
         hexFrame.setVisible(true);
     }
 
+    public JPanel displayMenuPanel(HexModel m) {
+        JPanel menuP = new JPanel();
+        playB = new JButton("Play");
+        playB.addActionListener(this);
+        quitB = new JButton("Quit");
+        quitB.addActionListener(this);
+        menuP.add(playB);
+        menuP.add(quitB);
+        return menuP;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if(source == playB){
+            System.out.println("Play");
+        } else if(source == quitB){
+            System.out.println("Quit");
+        }
+    }
+
     public JPanel displayMainPanel(HexModel m) {
-        JPanel p = new JPanel() {
+        JPanel mainP = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 paintComponent((Graphics2D) g);
             }
-
             protected void paintComponent(Graphics2D g) {
                 super.paintComponent(g);
                 displayGrid(g, m);
                 displayBorders(g);
             }
         };
-        return p;
+        return mainP;
     }
 
     @Override
@@ -99,8 +122,7 @@ public class HexView implements Observer {
     }
 
     protected void displayBorders(Graphics2D g) {
-
-        g.setColor(Color.blue);
+        g.setColor(Entities.PLAYER1_COLOR);
         g.setStroke(new BasicStroke(2));
         int top1 = 0;
         int top2 = 0;
@@ -114,7 +136,7 @@ public class HexView implements Observer {
         }
         top1 = 0;
         top2 = 0;
-        g.setColor(Color.red);
+        g.setColor(Entities.PLAYER2_COLOR);
         for (int i = 0; i < 7; i++) {
             g.drawLine(492 - top1, 206 + top2, 483 - top1, 222 + top2); //right down red borders
             g.drawLine(482 - top1, 223 + top2, 461 - top1, 223 + top2);

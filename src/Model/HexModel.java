@@ -15,14 +15,12 @@ public class HexModel extends Observable {
     static Player player1;
     static Player player2;
     static Player currentPlayer;
-    private boolean done;
 
     public HexModel() {
         player1 = new Player(1);
         player2 = new Player(2);
         currentPlayer = player1;
         gridHex = new Grid();
-        /*gameLoop();*/
     }
 
     public Grid getGridHex() {
@@ -56,7 +54,7 @@ public class HexModel extends Observable {
     public static void setCurrentPlayer(Player currentPlayer) {
         HexModel.currentPlayer = currentPlayer;
     }
-    
+
     public static Player getPlayer1() {
         return player1;
     }
