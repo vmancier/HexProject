@@ -11,11 +11,13 @@ public class Player {
     private int playerNumber;
     private int score = 0;
     boolean isPlaying = false;
+    boolean hasPlayed = false;
+    boolean hasWon = false;
     private Color color;
 
     public Player(int playerNumber) {
         this.playerNumber = playerNumber;
-        switch(this.playerNumber) {
+        switch (this.playerNumber) {
             case 1:
                 this.color = Entities.PLAYER1_COLOR;
                 this.score = 0;
@@ -33,7 +35,6 @@ public class Player {
         return playerNumber;
     }
 
-
     public int getScore() {
         return score;
     }
@@ -44,6 +45,22 @@ public class Player {
 
     public boolean getIsPlaying() {
         return isPlaying;
+    }
+
+    public boolean getHasWon() {
+        return hasWon;
+    }
+
+    public void setHasWon(boolean hasWon) {
+        this.hasWon = hasWon;
+    }
+
+    public boolean getHasPlayed() {
+        return hasPlayed;
+    }
+
+    public void setHasPlayed(boolean hasPlayed) {
+        this.hasPlayed = hasPlayed;
     }
 
     public void setIsPlaying(boolean playing) {

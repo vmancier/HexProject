@@ -5,6 +5,8 @@ package Model;
  */
 
 import Application.Entities;
+import Controller.HexController;
+
 import java.awt.*;
 import java.util.Observable;
 
@@ -50,6 +52,10 @@ public class HexModel extends Observable {
 
     public void gameLoop() {
         done = true;
+        while (!HexModel.getCurrentPlayer().getHasPlayed()) {
+            //wait();
+        }
+        HexController.switchPlayer();
         //while (!done) {
 
         //}

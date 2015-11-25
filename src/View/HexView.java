@@ -24,8 +24,11 @@ public class HexView implements Observer {
     protected HexController controller;
     private String name;
     private JFrame hexFrame;
-    private JPanel pa;
-    //private JTextField displayField = new JTextField();
+    private JPanel pa;/*
+    private JPanel scorePanel;
+    private JTextField score1 = new JTextField();
+    private JTextField score2;
+    */
 
     public HexView(String name, HexModel model, HexController controller, int posX, int posY) {
         this.name = name;
@@ -38,7 +41,6 @@ public class HexView implements Observer {
         hexFrame.setLocation(posX, posY);
         model.addObserver(this);
 
-
         hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
         hexFrame.setLocation(posX, posY);
         hexFrame.setVisible(true);
@@ -50,23 +52,19 @@ public class HexView implements Observer {
         pa.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
+                for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
                         //if (//model.getGridHex().getMatrix()[i][j].getCenterX()-Entities.CELL_SIZE>=arg0.getX() &&
-                               // model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
-                                //model.getGridHex().getMatrix()[i][j].getPosX()<=arg0.getX()+Entities.CELL_SIZE) {
+                        // model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
+                        //model.getGridHex().getMatrix()[i][j].getPosX()<=arg0.getX()+Entities.CELL_SIZE) {
                         //controller.changeCellColor(i,j);
-                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint()))
-                        {
+                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
                             //).getMatrix()[i][j].getCenterX());
-                            controller.changeCellColor(i,j);
+                            controller.changeCellColor(i, j);
                             pa.repaint();
-
                         }
-
                     }
                 }
-
             }
         });// Evenement qui survient au click
     }
@@ -81,7 +79,7 @@ public class HexView implements Observer {
             protected void paintComponent(Graphics2D g) {
                 super.paintComponent(g);
                 displayGrid(g, m);
-                displayLines(g);
+                displayBorders(g);
             }
         };
         return p;
@@ -114,29 +112,29 @@ public class HexView implements Observer {
         pa = displayPanel(model);
     }
 
-    protected void displayLines(Graphics2D g) {
-        int x1 = 300;
-        int y1 = 80;
-        int x2 = 480;
-        int y2 = 185;
-        int x3 = 480;
-        int y3 = 225;
-        int x4 = 300;
-        int y4 = 325;
-        int x5 = 270;
-        int y5 = 325;
-        int x6 = 90;
-        int y6 = 220;
-        int x7 = 90;
-        int y7 = 180;
-        int x8 = 270;
-        int y8 = 80;
-
+    protected void displayBorders(Graphics2D g) {
         g.setColor(Color.blue);
-        g.drawLine(x1, y1, x2, y2);
-        g.drawLine(x5, y5, x6, y6);
+        g.setStroke(new BasicStroke(2));
+        int top1 = 0;
+        int top2 = 0;
+        for (int i = 0; i < 7; i++) {
+            g.drawLine(276 + top1, 80 + top2, 295 + top1, 80 + top2);   //right up blue borders
+            g.drawLine(295 + top1, 80 + top2, 305 + top1, 97 + top2);
+            g.drawLine(295 - top1, 325 - top2, 275 - top1, 325 - top2); //left down blue borders
+            g.drawLine(274 - top1, 324 - top2, 266 - top1, 307 - top2);
+            top1 += 31;
+            top2 += 18;
+        }
+        top1 = 0;
+        top2 = 0;
         g.setColor(Color.red);
-        g.drawLine(x3, y3, x4, y4);
-        g.drawLine(x7, y7, x8, y8);
+        for (int i = 0; i < 7; i++) {
+            g.drawLine(492 - top1, 206 + top2, 483 - top1, 222 + top2); //right down red borders
+            g.drawLine(482 - top1, 223 + top2, 461 - top1, 223 + top2);
+            g.drawLine(80 + top1, 198 - top2, 88 + top1, 183 - top2);   //left up red borders
+            g.drawLine(275 - top1, 80 + top2, 295 - top1, 80 + top2);
+            top1 += 31;
+            top2 += 17;
+        }
     }
 }
