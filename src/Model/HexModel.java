@@ -29,9 +29,6 @@ public class HexModel extends Observable {
         return gridHex;
     }
 
-    public void setColorCell(int i, int j){gridHex.getCell(i,j).setColor(Entities.PLAYER1_COLOR);}
-
-
     public boolean playerWin(){
         boolean win = false;
         for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
@@ -53,14 +50,10 @@ public class HexModel extends Observable {
     }
 
     public void gameLoop() {
-        done = true;
-        while (!HexModel.getCurrentPlayer().getHasPlayed()) {
-            //wait();
-        }
-        HexController.switchPlayer();
-        //while (!done) {
 
-        //}
+        done = true;
+
+
     }
 
     public static Player getCurrentPlayer() {

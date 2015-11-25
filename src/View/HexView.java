@@ -23,7 +23,6 @@ public class HexView implements Observer {
     protected HexController controller;
     private String name;
     private JFrame hexFrame;
-    private JPanel pa;
     private JPanel mainPanel;
     private JPanel[][] gridPanel;
 
@@ -48,22 +47,7 @@ public class HexView implements Observer {
         mainPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                /*for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
-                    for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                        //if (//model.getGridHex().getMatrix()[i][j].getCenterX()-Entities.CELL_SIZE>=arg0.getX() &&
-                        // model.getGridHex().getMatrix()[i][j].getCenterX()<=arg0.getX()){
-                        //model.getGridHex().getMatrix()[i][j].getPosX()<=arg0.getX()+Entities.CELL_SIZE) {
-                        //controller.changeCellColor(i,j);
-                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
-                            //).getMatrix()[i][j].getCenterX());
-                            controller.changeCellColor(i, j);
-                            pa.repaint();
-                        }
-                    }
-                }*/
-
                 for (int i = 0; i <  Entities.ROWS_NUMBER; i++) {
-
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
                         if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
                             controller.changeCellColor(i,j);
@@ -73,8 +57,6 @@ public class HexView implements Observer {
                 mainPanel.repaint();
             }
         });// Evenement qui survient au click
-
-
         hexFrame.setVisible(true);
     }
 
@@ -114,10 +96,6 @@ public class HexView implements Observer {
                 g.fillPolygon(tmpMatrix[i][j]);
             }
         }
-    }
-
-    public void refresh() {
-        pa = displayPanel(model);
     }
 
     protected void displayBorders(Graphics2D g) {
