@@ -41,11 +41,9 @@ public class HexView implements Observer, ActionListener {
         hexFrame.setLocation(posX, posY);
         model.addObserver(this);
 
-        /*menuPanel = displayMenuPanel(model);
-        hexFrame.add(menuPanel);*/
-
+        menuPanel = displayMenuPanel(model);
+        hexFrame.add(menuPanel);
         mainPanel = displayMainPanel(model);
-        hexFrame.add(mainPanel);
 
         mainPanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -78,9 +76,11 @@ public class HexView implements Observer, ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == playB){
-            System.out.println("Play");
+            menuPanel.setVisible(false);
+            hexFrame.add(mainPanel);
+            mainPanel.setVisible(true);
         } else if(source == quitB){
-            System.out.println("Quit");
+            System.exit(1);
         }
     }
 
