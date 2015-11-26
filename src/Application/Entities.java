@@ -19,8 +19,8 @@ public class Entities {
     public static final int COLUMNS_NUMBER = 7;
 
     public static final Color EMPTY_COLOR = Color.lightGray;
-    public static final Color PLAYER1_COLOR = new Color(56, 150, 150);
-    public static final Color PLAYER2_COLOR = new Color(250, 93, 93);
+    public static final Color PLAYER1_COLOR = new Color(125, 198, 236);
+    public static final Color PLAYER2_COLOR = new Color(250, 184, 186);
 
     public static final int GRID_POS_X = WINDOW_WIDTH / 2 - 200;
     public static final int GRID_POS_Y = WINDOW_HEIGHT / 2 - 100;

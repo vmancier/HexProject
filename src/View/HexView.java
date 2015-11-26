@@ -39,6 +39,7 @@ public class HexView implements Observer, ActionListener {
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
         hexFrame.setLocation(posX, posY);
+        hexFrame.setResizable(false);
         model.addObserver(this);
 
         menuPanel = displayMenuPanel(model);
@@ -63,10 +64,32 @@ public class HexView implements Observer, ActionListener {
 
     public JPanel displayMenuPanel(HexModel m) {
         JPanel menuP = new JPanel();
+        menuP.setBackground(Entities.PLAYER2_COLOR);
+        menuP.setLayout(null);
+
+        JLabel titleL = new JLabel("Hex");
+        titleL.setFont(new Font("Verdana", 1, 40));
+        titleL.setBounds(Entities.WINDOW_WIDTH / 2 - 100 / 2, 50, 100, 30);
+
+        JLabel footerL = new JLabel("Created by Valentin Mancier and Eliott Vincent -- IUT de Bordeaux -- December 2015");
+        footerL.setFont(new Font("Verdana", 1, 12));
+        footerL.setBounds(0, Entities.WINDOW_HEIGHT - 55, 600, 30);
+
         playB = new JButton("Play");
+        playB.setBounds(Entities.WINDOW_WIDTH / 2 - 100 / 2, Entities.WINDOW_HEIGHT / 2, 100, 30);
+        playB.setBorder(BorderFactory.createEmptyBorder());
+        playB.setFocusPainted(false);
+        playB.setBackground(Entities.PLAYER1_COLOR);
         playB.addActionListener(this);
+
         quitB = new JButton("Quit");
+        quitB.setBounds(Entities.WINDOW_WIDTH / 2 - 100 / 2, Entities.WINDOW_HEIGHT / 2 + 30 * 2, 100, 30);
+        quitB.setBorder(BorderFactory.createEmptyBorder());
+        quitB.setBackground(Entities.PLAYER1_COLOR);
         quitB.addActionListener(this);
+
+        menuP.add(titleL);
+        menuP.add(footerL);
         menuP.add(playB);
         menuP.add(quitB);
         return menuP;
@@ -75,11 +98,11 @@ public class HexView implements Observer, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if(source == playB){
+        if (source == playB) {
             menuPanel.setVisible(false);
             hexFrame.add(mainPanel);
             mainPanel.setVisible(true);
-        } else if(source == quitB){
+        } else if (source == quitB) {
             System.exit(1);
         }
     }
@@ -90,6 +113,7 @@ public class HexView implements Observer, ActionListener {
             protected void paintComponent(Graphics g) {
                 paintComponent((Graphics2D) g);
             }
+
             protected void paintComponent(Graphics2D g) {
                 super.paintComponent(g);
                 displayGrid(g, m);
