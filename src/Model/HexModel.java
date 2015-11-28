@@ -16,15 +16,14 @@ public class HexModel extends Observable {
     static Player player2;
     static Player currentPlayer;
 
+    // -- HexModel ----------------------------------
+    // Creates a new model
+    // ----------------------------------------------
     public HexModel() {
         player1 = new Player(1);
         player2 = new Player(2);
-        currentPlayer = player1;
+        currentPlayer = player1;    //the player 1 is the first to play
         gridHex = new Grid();
-    }
-
-    public Grid getGridHex() {
-        return gridHex;
     }
 
     public boolean playerWin(){
@@ -47,18 +46,45 @@ public class HexModel extends Observable {
         }
     }
 
+    // -- getGridHex --------------------------------
+    // Returns the grid
+    // * out-parameters :
+    // - "gridHex", Grid : the grid
+    // ----------------------------------------------
+    public Grid getGridHex() {
+        return gridHex;
+    }
+
+    // -- getCurrentPlayer --------------------------
+    // Returns the player that's currently playing
+    // * out-parameters :
+    // - "currentPlayer", Player : the current player
+    // ----------------------------------------------
     public static Player getCurrentPlayer() {
         return currentPlayer;
     }
 
+    // -- setCurrentPlayer --------------------------
+    // Sets the current player
+    // ----------------------------------------------
     public static void setCurrentPlayer(Player currentPlayer) {
         HexModel.currentPlayer = currentPlayer;
     }
 
+    // -- getPlayer1 --------------------------------
+    // Returns the player 1
+    // * out-parameters :
+    // - "player1", Player : the player 1
+    // ----------------------------------------------
     public static Player getPlayer1() {
         return player1;
     }
 
+    // -- getPlayer2 --------------------------------
+    // Returns the player 2
+    // * out-parameters :
+    // - "player2", Player : the player 2
+    // ----------------------------------------------
     public static Player getPlayer2() {
         return player2;
     }
