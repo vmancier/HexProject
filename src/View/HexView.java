@@ -30,45 +30,59 @@ public class HexView implements Observer, ActionListener {
     private JButton playB;
     private JButton quitB;
 
+    // -- HexView -----------------------------------
+    // Creates a new view
+    // * in-parameters :
+    // - "name", String : the title of the window
+    // - "model", HexModel : the model linked to the view
+    // - "controller", HexController : the controller linked to the view
+    // - "posX", int : the horizontal position of the window
+    // - "posY", int : the vertical position of the window
+    // ----------------------------------------------
     public HexView(String name, HexModel model, HexController controller, int posX, int posY) {
         this.name = name;
         this.model = model;
         this.controller = controller;
 
-        hexFrame = new JFrame(name);
-        hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        hexFrame = new JFrame(name);    //creating a new window
+        hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    //closes the window when clicking an close operation is catched
         hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
         hexFrame.setLocation(posX, posY);
-        hexFrame.setResizable(false);
-        model.addObserver(this);
+        hexFrame.setResizable(false);   //locking the window
+        model.addObserver(this);    //the view is now an observer of the model
 
-        menuPanel = displayMenuPanel(model);
-        hexFrame.add(menuPanel);
-        mainPanel = displayMainPanel(model);
+        menuPanel = createMenuPanel();    //creating first the menu
+        hexFrame.add(menuPanel);    //adding it to the frame
+        mainPanel = createGamePanel(model);    //the creating the game panel
 
-        mainPanel.addMouseListener(new MouseAdapter() {
+        mainPanel.addMouseListener(new MouseAdapter() { //adding a mouse listener on the game panel
             @Override
-            public void mouseClicked(MouseEvent arg0) {
+            public void mouseClicked(MouseEvent arg0) { //listening only the clicks
                 for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
-                            controller.changeCellColor(i, j);
+                        if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {//checking if the click was located in a grid's cell
+                            controller.changeCellColor(i, j); //if so, then changing the color of the cell
                             model.groupCells(i, j);
                             if(model.victory()){
                                 System.out.println("VVVVVVIIIIICCTOIRE");
                             }
-                            controller.switchPlayer();
+                            controller.switchPlayer();//and switching of player
                         }
                     }
                 }
-                mainPanel.repaint();
+                mainPanel.repaint();    //refreshing the game panel
             }
-        });// Evenement qui survient au click
-        hexFrame.setVisible(true);
+        });
+        hexFrame.setVisible(true);  //finally, making the window visible
     }
 
-    public JPanel displayMenuPanel(HexModel m) {
-        JPanel menuP = new JPanel();
+    // -- createMenuPanel ---------------------------
+    // Creates the menu's panel
+    // * out-parameters :
+    // - "menuP", JPanel : the menu panel
+    // ----------------------------------------------
+    public JPanel createMenuPanel() {
+        JPanel menuP = new JPanel();    //creating an empty panel
         menuP.setBackground(Entities.PLAYER2_COLOR);
         menuP.setLayout(null);
 
@@ -93,13 +107,18 @@ public class HexView implements Observer, ActionListener {
         quitB.setBackground(Entities.PLAYER1_COLOR);
         quitB.addActionListener(this);
 
-        menuP.add(titleL);
+        menuP.add(titleL);  //adding the created elements to the panel
         menuP.add(footerL);
         menuP.add(playB);
         menuP.add(quitB);
         return menuP;
     }
 
+    // -- actionPerformed ---------------------------
+    // Waits for events on the menu's buttons
+    // * in-parameters :
+    // - "e", ActionEvent : the event
+    // ----------------------------------------------
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
@@ -112,45 +131,56 @@ public class HexView implements Observer, ActionListener {
         }
     }
 
-    public JPanel displayMainPanel(HexModel m) {
-        JPanel mainP = new JPanel() {
+    // -- createGamePanel ---------------------------
+    // Creates the game's panel
+    // * in-parameters :
+    // - "m", HexModel : the game's model
+    // * out-parameters :
+    // - "gameP", JPanel : the game's panel
+    // ----------------------------------------------
+    public JPanel createGamePanel(HexModel m) {
+        JPanel gameP = new JPanel() {
             @Override
-            protected void paintComponent(Graphics g) {
-                paintComponent((Graphics2D) g);
+            protected void paintComponent(Graphics g) { //overriding the paintComponent() function
+                paintComponent((Graphics2D) g); //we can now use Graphics2D
             }
 
             protected void paintComponent(Graphics2D g) {
                 super.paintComponent(g);
-                displayGrid(g, m);
-                displayBorders(g);
+                createGrid(g, m);
+                createBorders(g);
             }
         };
-        return mainP;
+        return gameP;
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
-    public void displayGrid(Graphics2D g, HexModel m) {
-        Grid tmpGrid = m.getGridHex();
-        Cell[][] tmpMatrix = tmpGrid.getMatrix();
+    // -- createGrid --------------------------------
+    // Creates the game's grid
+    // * in-parameters :
+    // - "g", Graphics2D : the graphics
+    // - "m", HexModel : the game's model
+    // ----------------------------------------------
+    public void createGrid(Graphics2D g, HexModel m) {
+        Grid tmpGrid = m.getGridHex();  //creating a new grid from the hex's grid
+        Cell[][] tmpMatrix = tmpGrid.getMatrix();   //creating a new matrix from the new grid
         for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
             for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                g.setColor(Color.black);    //borders
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                g.setColor(Color.black);    //borders
                 g.drawPolygon(tmpMatrix[i][j]);
                 g.setColor(tmpMatrix[i][j].getColor());   //filling color
-                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.fillPolygon(tmpMatrix[i][j]);
             }
         }
     }
 
-    protected void displayBorders(Graphics2D g) {
+    // -- createBorders -----------------------------
+    // Creates the external colored borders of the grid
+    // * in-parameters :
+    // - "g", Graphics2D : the graphics
+    // ----------------------------------------------
+    protected void createBorders(Graphics2D g) {
         g.setColor(Entities.PLAYER1_COLOR);
         g.setStroke(new BasicStroke(2));
         int top1 = 0;
@@ -167,12 +197,23 @@ public class HexView implements Observer, ActionListener {
         top2 = 0;
         g.setColor(Entities.PLAYER2_COLOR);
         for (int i = 0; i < 7; i++) {
-            g.drawLine(492 - top1, 206 + top2, 483 - top1, 222 + top2); //right down red borders
+            g.drawLine(492 - top1, 206 + top2, 483 - top1, 222 + top2); //right down pink borders
             g.drawLine(482 - top1, 223 + top2, 461 - top1, 223 + top2);
-            g.drawLine(80 + top1, 198 - top2, 88 + top1, 183 - top2);   //left up red borders
+            g.drawLine(80 + top1, 198 - top2, 88 + top1, 183 - top2);   //left up pink borders
             g.drawLine(275 - top1, 80 + top2, 295 - top1, 80 + top2);
             top1 += 31;
             top2 += 17;
         }
+    }
+
+    // -- update -----------------------------------
+    // Called whenever the observed object is changed
+    // * in-parameters :
+    // - "o", Observable : the observable object
+    // - "arg", Object : an argument passed to the notifyObservers method
+    // ---------------------------------------------
+    @Override   //needs to be override since HewView implements Observe
+    public void update(Observable o, Object arg) {
+
     }
 }
