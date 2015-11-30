@@ -53,6 +53,11 @@ public class HexView implements Observer, ActionListener {
                     for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
                         if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {
                             controller.changeCellColor(i, j);
+                            model.groupCells(i, j);
+                            if(model.victory()){
+                                System.out.println("VVVVVVIIIIICCTOIRE");
+                            }
+                            controller.switchPlayer();
                         }
                     }
                 }

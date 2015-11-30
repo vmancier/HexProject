@@ -3,6 +3,8 @@ package Model;
 import Application.Entities;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Eliott on 19/10/2015.
@@ -14,6 +16,7 @@ public class Player {
     boolean hasPlayed = false;
     boolean hasWon = false;
     private Color color;
+    ArrayList<ArrayList<Cell>> blocks;
 
     public Player(int playerNumber) {
         this.playerNumber = playerNumber;
@@ -29,6 +32,7 @@ public class Player {
                 this.isPlaying = false;
                 break;
         }
+        blocks = new ArrayList<ArrayList<Cell>>();
     }
 
     public int getPlayerNumber() {
@@ -70,4 +74,7 @@ public class Player {
     public Color getColor() {
         return color;
     }
+
+    public ArrayList<ArrayList<Cell>> getBlocks() {return blocks;}
+
 }
