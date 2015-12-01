@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -27,8 +28,10 @@ public class HexView implements Observer, ActionListener {
     private JFrame hexFrame;
     private JPanel menuPanel;
     private JPanel mainPanel;
+    private JPanel victoryPanel;
     private JButton playB;
     private JButton quitB;
+    private JButton nextB;
 
     // -- HexView -----------------------------------
     // Creates a new view
@@ -55,6 +58,7 @@ public class HexView implements Observer, ActionListener {
         hexFrame.add(menuPanel);    //adding it to the frame
         mainPanel = createGamePanel(model);    //the creating the game panel
 
+
         mainPanel.addMouseListener(new MouseAdapter() { //adding a mouse listener on the game panel
             @Override
             public void mouseClicked(MouseEvent arg0) { //listening only the clicks
@@ -64,7 +68,10 @@ public class HexView implements Observer, ActionListener {
                             controller.changeCellColor(i, j); //if so, then changing the color of the cell
                             model.groupCells(i, j);
                             if (model.victory()) {
-                                System.out.println("VVVVVVIIIIICCTOIRE");
+                                victoryPanel = createVictoryPanel();
+                                mainPanel.setVisible(false);
+                                hexFrame.add(victoryPanel);
+                                victoryPanel.setVisible(true);
                             }
                             controller.switchPlayer();  //and switching of player
                         }
@@ -128,6 +135,11 @@ public class HexView implements Observer, ActionListener {
             mainPanel.setVisible(true);
         } else if (source == quitB) {
             System.exit(1);
+        }else if (source == nextB){
+            victoryPanel.setVisible(false);
+            model.initModel();
+            hexFrame.add(menuPanel);
+            menuPanel.setVisible(true);
         }
     }
 
@@ -228,11 +240,23 @@ public class HexView implements Observer, ActionListener {
         victoryP.setBackground(Color.orange);
         victoryP.setLayout(null);
 
-        JLabel titleL = new JLabel("Victoire !!");
-        titleL.setFont(new Font("Verdana", 1, 40));
-        titleL.setBounds(Entities.WINDOW_WIDTH / 2 - 100 / 2, 50, 100, 30);
+        JLabel titleL1 = new JLabel("Victoire du ");
+        titleL1.setFont(new Font("Verdana", 1, 40));
+        titleL1.setBounds(Entities.WINDOW_WIDTH / 2 - 260 / 2, 100, 260, 50);
+        JLabel titleL2 = new JLabel(model.getCurrentPlayer().toString());
+        titleL2.setFont(new Font("Verdana", 1, 40));
+        titleL2.setBounds(Entities.WINDOW_WIDTH / 2 - 200 / 2, 200, 200, 50);
 
-        victoryP.add(titleL);
+        nextB = new JButton("Next");
+        nextB.setBounds(Entities.WINDOW_WIDTH / 2 - 100 / 2, Entities.WINDOW_HEIGHT / 2, 100, 30);
+        nextB.setBorder(BorderFactory.createEmptyBorder());
+        nextB.setFocusPainted(false);
+        nextB.setBackground(Entities.PLAYER1_COLOR);
+        nextB.addActionListener(this);
+
+        victoryP.add(titleL1);
+        victoryP.add(titleL2);
+        victoryP.add(nextB);
 
         return victoryP;
     }

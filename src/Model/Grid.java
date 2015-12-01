@@ -18,6 +18,10 @@ public class Grid {
         this.rows = Entities.ROWS_NUMBER;
         this.columns = Entities.COLUMNS_NUMBER;
         this.matrix = new Cell[rows][columns];
+        createGrid();
+    }
+
+    public void createGrid(){
         for (int i = 0; i < rows; i++) {    //for each row in the grid
             for (int j = 0; j < columns; j++) {     //and for each column
                 matrix[i][j] = new Cell(i, j,   //a cell is created and added to the matrix
@@ -26,7 +30,6 @@ public class Grid {
             }
         }
     }
-
     // -- getMatrix ----------------------------------
     // Returns the matrix
     // * out-parameters :

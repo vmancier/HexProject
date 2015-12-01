@@ -21,6 +21,12 @@ public class HexModel extends Observable {
     public HexModel() {
         player1 = new Player(1);
         player2 = new Player(2);
+        initModel();
+    }
+
+    public void initModel(){
+        player1.initPlayer();
+        player2.initPlayer();
         currentPlayer = player1;    //the player 1 is the first to play
         gridHex = new Grid();
     }
@@ -28,7 +34,7 @@ public class HexModel extends Observable {
     public void groupCells(int r, int c) {
         if (nbNextToCell(gridHex.getMatrix()[r][c]) > 0) {
             if (nbNextToCell(gridHex.getMatrix()[r][c]) == 1) {
-                boolean finded = false;
+                boolean found = false;
                 for (ArrayList<Cell> co : currentPlayer.getBlocks()) {
                     for (Cell cell : co) {
                         if (cell.getCenterX() < gridHex.getMatrix()[r][c].getCenterX() + 2 * Entities.CELL_SIZE
@@ -36,10 +42,10 @@ public class HexModel extends Observable {
                                 && cell.getCenterY() < gridHex.getMatrix()[r][c].getCenterY() + 2 * Entities.CELL_SIZE
                                 && cell.getCenterY() > gridHex.getMatrix()[r][c].getCenterY() - 2 * Entities.CELL_SIZE) {
 
-                            finded = true;
+                            found = true;
                         }
                     }
-                    if (finded == true) {
+                    if (found == true) {
                         co.add(gridHex.getMatrix()[r][c]);
                     }
                 }
@@ -87,7 +93,6 @@ public class HexModel extends Observable {
     }
 
     public boolean victory() {
-        //System.out.println(currentPlayer.getColor());
         boolean win = false;
         boolean start = false;
         boolean finish = false;
