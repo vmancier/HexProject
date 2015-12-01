@@ -46,7 +46,7 @@ public class HexView implements Observer, ActionListener {
 
         hexFrame = new JFrame(name);    //creating a new window
         hexFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    //closes the window when clicking an close operation is catched
-        hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_WIDTH);
+        hexFrame.setSize(Entities.WINDOW_WIDTH, Entities.WINDOW_HEIGHT);
         hexFrame.setLocation(posX, posY);
         hexFrame.setResizable(false);   //locking the window
         model.addObserver(this);    //the view is now an observer of the model
@@ -88,11 +88,11 @@ public class HexView implements Observer, ActionListener {
 
         JLabel titleL = new JLabel("Hex");
         titleL.setFont(new Font("Verdana", 1, 40));
-        titleL.setBounds(Entities.WINDOW_WIDTH / 2 - 100 / 2, 50, 100, 30);
+        titleL.setBounds(Entities.WINDOW_WIDTH / 2 - titleL.getPreferredSize().width / 2, 50, 100, 30);
 
         JLabel footerL = new JLabel("Created by Valentin Mancier and Eliott Vincent -- IUT de Bordeaux -- December 2015");
         footerL.setFont(new Font("Verdana", 1, 12));
-        footerL.setBounds(0, Entities.WINDOW_HEIGHT - 55, 600, 30);
+        footerL.setBounds(Entities.WINDOW_WIDTH / 2 - footerL.getPreferredSize().width / 2, Entities.WINDOW_HEIGHT - 55, 600, 30);
 
         playB = new JButton("Play");
         playB.setBounds(Entities.WINDOW_WIDTH / 2 - 100 / 2, Entities.WINDOW_HEIGHT / 2, 100, 30);
@@ -186,23 +186,23 @@ public class HexView implements Observer, ActionListener {
         int top1 = 0;
         int top2 = 0;
         for (int i = 0; i < 7; i++) {
-            g.drawLine(276 + top1, 80 + top2, 295 + top1, 80 + top2);   //right up blue borders
-            g.drawLine(295 + top1, 80 + top2, 305 + top1, 97 + top2);
-            g.drawLine(295 - top1, 325 - top2, 275 - top1, 325 - top2); //left down blue borders
-            g.drawLine(274 - top1, 324 - top2, 266 - top1, 307 - top2);
-            top1 += 31;
-            top2 += 18;
+            g.drawLine(381 + top1, 77 + top2, 410 + top1, 77 + top2);   //right up blue borders
+            g.drawLine(411 + top1, 78 + top2, 426 + top1, 103 + top2);
+            g.drawLine(411 - top1, 442 - top2, 381 - top1, 442 - top2); //left down blue borders
+            g.drawLine(380 - top1, 441 - top2, 365 - top1, 416 - top2);
+            top1 += 46;
+            top2 += 26;
         }
         top1 = 0;
         top2 = 0;
         g.setColor(Entities.PLAYER2_COLOR);
         for (int i = 0; i < 7; i++) {
-            g.drawLine(492 - top1, 206 + top2, 483 - top1, 222 + top2); //right down pink borders
-            g.drawLine(482 - top1, 223 + top2, 461 - top1, 223 + top2);
-            g.drawLine(80 + top1, 198 - top2, 88 + top1, 183 - top2);   //left up pink borders
-            g.drawLine(275 - top1, 80 + top2, 295 - top1, 80 + top2);
-            top1 += 31;
-            top2 += 17;
+            g.drawLine(702 - top1, 260 + top2, 688 - top1, 285 + top2); //right down pink borders
+            g.drawLine(687 - top1, 286 + top2, 657 - top1, 286 + top2);
+            g.drawLine(89 + top1, 259 - top2, 103 + top1, 234 - top2);   //left up pink borders
+            g.drawLine(104 + top1, 233 - top2, 134 + top1, 233 - top2);
+            top1 += 46;
+            top2 += 26;
         }
     }
 
