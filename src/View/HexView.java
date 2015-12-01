@@ -16,7 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -135,7 +134,7 @@ public class HexView implements Observer, ActionListener {
             mainPanel.setVisible(true);
         } else if (source == quitB) {
             System.exit(1);
-        }else if (source == nextB){
+        } else if (source == nextB) {
             victoryPanel.setVisible(false);
             model.initModel();
             hexFrame.add(menuPanel);
@@ -237,25 +236,21 @@ public class HexView implements Observer, ActionListener {
     public JPanel createVictoryPanel() {
         JPanel victoryP = new JPanel();
 
-        victoryP.setBackground(Color.orange);
+        victoryP.setBackground(Entities.PLAYER2_COLOR);
         victoryP.setLayout(null);
 
-        JLabel titleL1 = new JLabel("Victoire du ");
+        JLabel titleL1 = new JLabel("Victoire du " + model.getCurrentPlayer().toString());
         titleL1.setFont(new Font("Verdana", 1, 40));
-        titleL1.setBounds(Entities.WINDOW_WIDTH / 2 - 260 / 2, 100, 260, 50);
-        JLabel titleL2 = new JLabel(model.getCurrentPlayer().toString());
-        titleL2.setFont(new Font("Verdana", 1, 40));
-        titleL2.setBounds(Entities.WINDOW_WIDTH / 2 - 200 / 2, 200, 200, 50);
+        titleL1.setBounds(Entities.WINDOW_WIDTH / 2 - titleL1.getPreferredSize().width / 2, 100, 500, 50);
 
         nextB = new JButton("Next");
-        nextB.setBounds(Entities.WINDOW_WIDTH / 2 - 100 / 2, Entities.WINDOW_HEIGHT / 2, 100, 30);
+        nextB.setBounds(Entities.WINDOW_WIDTH / 2 - nextB.getPreferredSize().width / 2, Entities.WINDOW_HEIGHT / 2, 100, 30);
         nextB.setBorder(BorderFactory.createEmptyBorder());
         nextB.setFocusPainted(false);
         nextB.setBackground(Entities.PLAYER1_COLOR);
         nextB.addActionListener(this);
 
         victoryP.add(titleL1);
-        victoryP.add(titleL2);
         victoryP.add(nextB);
 
         return victoryP;
