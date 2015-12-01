@@ -31,6 +31,9 @@ public class Player {
                 this.isPlaying = false;
                 break;
         }
+    }
+
+    public void initPlayer(){
         blocks = new ArrayList<ArrayList<Cell>>();
     }
 
@@ -72,6 +75,10 @@ public class Player {
 
     public ArrayList<ArrayList<Cell>> getBlocks() {
         return blocks;
+    }
+
+    public String toString(){
+        return "joueur "+this.playerNumber;
     }
 
 }
