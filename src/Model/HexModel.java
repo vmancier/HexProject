@@ -5,11 +5,8 @@ package Model;
  */
 
 import Application.Entities;
-import Controller.HexController;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Observable;
 
 public class HexModel extends Observable {
@@ -26,11 +23,9 @@ public class HexModel extends Observable {
         player2 = new Player(2);
         currentPlayer = player1;    //the player 1 is the first to play
         gridHex = new Grid();
-
     }
 
     public void groupCells(int r, int c) {
-
         if (nbNextToCell(gridHex.getMatrix()[r][c]) > 0) {
             if (nbNextToCell(gridHex.getMatrix()[r][c]) == 1) {
                 boolean finded = false;
@@ -50,7 +45,7 @@ public class HexModel extends Observable {
                 }
             } else {
                 ArrayList<Cell> cellPile = new ArrayList<Cell>();
-                boolean finded = false;
+                boolean found = false;
                 for (ArrayList<Cell> co : currentPlayer.getBlocks()) {
                     for (Cell cell : co) {
                         if (cell.getCenterX() < gridHex.getMatrix()[r][c].getCenterX() + 2 * Entities.CELL_SIZE
@@ -58,10 +53,10 @@ public class HexModel extends Observable {
                                 && cell.getCenterY() < gridHex.getMatrix()[r][c].getCenterY() + 2 * Entities.CELL_SIZE
                                 && cell.getCenterY() > gridHex.getMatrix()[r][c].getCenterY() - 2 * Entities.CELL_SIZE) {
 
-                            finded = true;
+                            found = true;
                         }
                     }
-                    if (finded == true) {
+                    if (found == true) {
                         cellPile.addAll(co);
                         co.clear();
                     }
@@ -73,7 +68,6 @@ public class HexModel extends Observable {
             cells.add(gridHex.getMatrix()[r][c]);
             currentPlayer.getBlocks().add(cells);
         }
-
     }
 
     public int nbNextToCell(Cell c) {
@@ -95,32 +89,31 @@ public class HexModel extends Observable {
     public boolean victory() {
         //System.out.println(currentPlayer.getColor());
         boolean win = false;
-        boolean start=false;
-        boolean finish=false;
+        boolean start = false;
+        boolean finish = false;
         for (ArrayList<Cell> co : currentPlayer.getBlocks()) {
             for (Cell cell : co) {
                 if (currentPlayer == player1) {
-                    if (cell.getPosX() == 0 ) {
-                        start=true;
+                    if (cell.getPosX() == 0) {
+                        start = true;
                     }
-                    if(cell.getPosX() == Entities.COLUMNS_NUMBER - 1){
-                        finish=true;
+                    if (cell.getPosX() == Entities.COLUMNS_NUMBER - 1) {
+                        finish = true;
                     }
-                }
-                else{
-                    if (cell.getPosY() == 0 ) {
-                        start=true;
+                } else {
+                    if (cell.getPosY() == 0) {
+                        start = true;
                     }
-                    if(cell.getPosY() == Entities.ROWS_NUMBER- 1){
-                        finish=true;
+                    if (cell.getPosY() == Entities.ROWS_NUMBER - 1) {
+                        finish = true;
                     }
                 }
             }
-            if (start && finish){
-                win=true;
+            if (start && finish) {
+                win = true;
             }
-            start=false;
-            finish=false;
+            start = false;
+            finish = false;
         }
         return win;
     }
