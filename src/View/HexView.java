@@ -63,10 +63,10 @@ public class HexView implements Observer, ActionListener {
                         if (model.getGridHex().getMatrix()[i][j].contains(arg0.getPoint())) {//checking if the click was located in a grid's cell
                             controller.changeCellColor(i, j); //if so, then changing the color of the cell
                             model.groupCells(i, j);
-                            if(model.victory()){
+                            if (model.victory()) {
                                 System.out.println("VVVVVVIIIIICCTOIRE");
                             }
-                            controller.switchPlayer();//and switching of player
+                            controller.switchPlayer();  //and switching of player
                         }
                     }
                 }
@@ -215,5 +215,25 @@ public class HexView implements Observer, ActionListener {
     @Override   //needs to be override since HewView implements Observe
     public void update(Observable o, Object arg) {
 
+    }
+
+    // -- createVictoryPanel ------------------------
+    // Creates the victory's panel
+    // * out-parameters :
+    // - "victoryP", JPanel : the menu panel
+    // ----------------------------------------------
+    public JPanel createVictoryPanel() {
+        JPanel victoryP = new JPanel();
+
+        victoryP.setBackground(Color.orange);
+        victoryP.setLayout(null);
+
+        JLabel titleL = new JLabel("Victoire !!");
+        titleL.setFont(new Font("Verdana", 1, 40));
+        titleL.setBounds(Entities.WINDOW_WIDTH / 2 - 100 / 2, 50, 100, 30);
+
+        victoryP.add(titleL);
+
+        return victoryP;
     }
 }
