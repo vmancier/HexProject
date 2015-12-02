@@ -41,55 +41,54 @@ public class HexModel extends Observable {
     // - "c", int : row's index
     // ----------------------------------------------
     public void groupCells(int r, int c) {
-        if (nbNextToCell(gridHex.getMatrix()[r][c]) > 0) {// si la cellule a des voisins
-            if (nbNextToCell(gridHex.getMatrix()[r][c]) == 1) {//s'il n'y a qu'un seul voisin
+        if (nbNextToCell(gridHex.getMatrix()[r][c]) > 0) {  //if the cell got close cells
+            if (nbNextToCell(gridHex.getMatrix()[r][c]) == 1) { //if there is only one neighbour
                 boolean found = false;
-                for (ArrayList<Cell> co : currentPlayer.getBlocks()) {// parcours de la liste de blocs de cellules
-                    for (Cell cell : co) {//parcours des blocs de cellules
-                        //recherche d'une cellule voisine de la cellule clickée
+                for (ArrayList<Cell> co : currentPlayer.getBlocks()) {  //browsing the list of cell's blocks
+                    for (Cell cell : co) {  //browsing the cell's blocks
+                        //searching for a close cell of the clicked cell
                         if (cell.getCenterX() < gridHex.getMatrix()[r][c].getCenterX() + 2 * Entities.CELL_SIZE
                                 && cell.getCenterX() > gridHex.getMatrix()[r][c].getCenterX() - 2 * Entities.CELL_SIZE
                                 && cell.getCenterY() < gridHex.getMatrix()[r][c].getCenterY() + 2 * Entities.CELL_SIZE
                                 && cell.getCenterY() > gridHex.getMatrix()[r][c].getCenterY() - 2 * Entities.CELL_SIZE) {
 
-                            found = true; //cellule voisine trouvée
+                            found = true;   //close cell found
                         }
                     }
-                    if (found == true) {//si une cellule voisine a été trouvée
-                        co.add(gridHex.getMatrix()[r][c]);//ajout de la cellule clickée au bloc de cellules de la cellule voisine
+                    if (found == true) {    //if a a close cell of the clicked cell has been found
+                        co.add(gridHex.getMatrix()[r][c]);  //then adding the clicked cell to the block of cells of the close cell
                     }
                 }
-            } else {//s'il y a plusieurs voisins
-                ArrayList<Cell> cellPile = new ArrayList<Cell>();//bloc de fusion
-                ArrayList<ArrayList<Cell>> basketArray = new ArrayList<ArrayList<Cell>>(); //liste des blocs à supprimer
+            } else {    //if there are several close cells
+                ArrayList<Cell> cellPile = new ArrayList<>();   //fusion block
+                ArrayList<ArrayList<Cell>> basketArray = new ArrayList<>(); //list of blocks to delete
                 boolean found = false;
-                for (ArrayList<Cell> co : currentPlayer.getBlocks()) {// parcours de la liste de blocs de cellules
-                    for (Cell cell : co) {//parcours des blocs de cellules
-                        //recherche d'une cellule voisine de la cellule clickée
+                for (ArrayList<Cell> co : currentPlayer.getBlocks()) {  //browsing the list of cell's blocks
+                    for (Cell cell : co) {  //browsing the cell's blocks
+                        //searching for a close cell of the clicked cell
                         if (cell.getCenterX() < gridHex.getMatrix()[r][c].getCenterX() + 2 * Entities.CELL_SIZE
                                 && cell.getCenterX() > gridHex.getMatrix()[r][c].getCenterX() - 2 * Entities.CELL_SIZE
                                 && cell.getCenterY() < gridHex.getMatrix()[r][c].getCenterY() + 2 * Entities.CELL_SIZE
                                 && cell.getCenterY() > gridHex.getMatrix()[r][c].getCenterY() - 2 * Entities.CELL_SIZE) {
 
-                            found = true;//cellule voisine trouvée
+                            found = true;   //close cell found
                         }
                     }
-                    if (found == true) {//si une cellule voisine a été trouvée
-                        cellPile.addAll(co);//ajout de toutes les cellules du bloc de la cellule voisine au bloc de fusion
-                        basketArray.add(co);//ajout du bloc à la liste des blocs à supprimer
+                    if (found == true) {    //if a a close cell of the clicked cell has been found
+                        cellPile.addAll(co);    //adding all the block's cells of the close cell to the fusion block
+                        basketArray.add(co);    //adding the block to the list of blocks to delete
                     }
                 }
-                for (ArrayList<Cell> co : basketArray) {//parcours des blocs à supprimer
-                    currentPlayer.getBlocks().remove(co);//suppression des blocs
+                for (ArrayList<Cell> co : basketArray) {    //browsing the list blocks to delete
+                    currentPlayer.getBlocks().remove(co);   //deleting the blocks
                 }
-                cellPile.add(gridHex.getMatrix()[r][c]);//ajout de la case clickée au bloc de fusion
-                currentPlayer.getBlocks().add(cellPile);//ajout du bloc de fusion à la liste des blocs
+                cellPile.add(gridHex.getMatrix()[r][c]);    //adding the clicked cell to the fusion block
+                currentPlayer.getBlocks().add(cellPile);    //adding the fusion block to the list of blocks
             }
-        }
-        else {// si la cellule n'a pas de voisins
-            ArrayList<Cell> cells = new ArrayList<Cell>(); //création d'un bloc de cellules
-            cells.add(gridHex.getMatrix()[r][c]);//ajout de la cellule clickée dans ce bloc
-            currentPlayer.getBlocks().add(cells);//ajout du bloc à la liste des blocs du joueur courant
+        } else {    //if the cell hasn't any close cell
+            ArrayList<Cell> cells = new ArrayList<>();  //creating a block of cells
+            cells.add(gridHex.getMatrix()[r][c]);   //adding the clicked cell to this block
+            currentPlayer.getBlocks().add(cells);   //adding this block to the current player's list of blocks
         }
     }
 
@@ -102,9 +101,9 @@ public class HexModel extends Observable {
     // ----------------------------------------------
     public int nbNextToCell(Cell c) {
         int nbCellsClose = 0;
-        for (ArrayList<Cell> co : currentPlayer.getBlocks()) {
-            for (Cell cell : co) {
-                if (cell != c) {
+        for (ArrayList<Cell> co : currentPlayer.getBlocks()) {  //browsing the list of cell's blocks
+            for (Cell cell : co) {  //browsing the cell's blocks
+                if (cell != c) {    //verifying the cell is different of itself
                     if (cell.getCenterX() < c.getCenterX() + 2 * Entities.CELL_SIZE
                             && cell.getCenterX() > c.getCenterX() - 2 * Entities.CELL_SIZE
                             && cell.getCenterY() < c.getCenterY() + 2 * Entities.CELL_SIZE
@@ -127,26 +126,26 @@ public class HexModel extends Observable {
         boolean win = false;
         boolean start = false;
         boolean finish = false;
-        for (ArrayList<Cell> co : currentPlayer.getBlocks()) {// parcours de la liste de blocs de cellules
-            for (Cell cell : co) {//parcours des blocs de cellules
-                if (currentPlayer == player1) {// si le joueur 1 joue
-                    if (cell.getPosX() == 0) {// si une des cellule est en bas à gauche
-                        start = true; //elle se trouve à la position de départ
+        for (ArrayList<Cell> co : currentPlayer.getBlocks()) {  //browsing the list of cell's blocks
+            for (Cell cell : co) {  //browsing the cell's blocks
+                if (currentPlayer == player1) { //if the player 1 is playing
+                    if (cell.getPosX() == 0) {  //if one of the cells is down left
+                        start = true; //it becomes the starting position
                     }
-                    if (cell.getPosX() == Entities.COLUMNS_NUMBER - 1) {// si une des cellule est en haut à droite
-                        finish = true;//elle se trouve à la position d'arrivée
+                    if (cell.getPosX() == Entities.COLUMNS_NUMBER - 1) {    //if one of the cell is up right
+                        finish = true;  //it becomes the finish position
                     }
-                } else {//si le joueur 2 joue
-                    if (cell.getPosY() == 0) { // si une des cellule est en haut à gauche
-                        start = true;//elle se trouve à la position de départ
+                } else {    //if the player 2 is playing
+                    if (cell.getPosY() == 0) {  //if one of the cells is up left
+                        start = true;   //it becomes the starting position
                     }
-                    if (cell.getPosY() == Entities.ROWS_NUMBER - 1) {// si une des cellule est en bas à droite
-                        finish = true;//elle se trouve à la position d'arrivée
+                    if (cell.getPosY() == Entities.ROWS_NUMBER - 1) {   //if one of the cell is down right
+                        finish = true;  //it becomes the finish position
                     }
                 }
             }
-            if (start && finish) {// si les bouts de la chaine sont au départ et à l'arrivée
-                win = true; // le joueur a gagné
+            if (start && finish) {  //if the extremities of the chain are at the starting position and the finish position
+                win = true; //then the player has won
             }
             start = false;
             finish = false;

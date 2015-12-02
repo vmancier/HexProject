@@ -30,11 +30,14 @@ public class Player {
         }
     }
 
+    // -- initPlayer --------------------------------
+    // Initializes the player
+    // ----------------------------------------------
     public void initPlayer() {
-        blocks = new ArrayList<ArrayList<Cell>>();
+        blocks = new ArrayList<>();
     }
 
-    // -- getColor ---------------------------------
+    // -- getColor ----------------------------------
     // Returns the color of the player
     // * out-parameters :
     // - "color", Color : the player's color
@@ -43,12 +46,22 @@ public class Player {
         return color;
     }
 
+    // -- getBlocks ---------------------------------
+    // Returns the color of the player
+    // * out-parameters :
+    // - "blocks", ArrayList<ArrayList<Cell>> : the list of lists of cell's blocks
+    // ----------------------------------------------
     public ArrayList<ArrayList<Cell>> getBlocks() {
         return blocks;
     }
 
+    // -- toString ----------------------------------
+    // Returns a string identifying the player (used for the victory panel)
+    // * out-parameters :
+    // - "str", String : the string
+    // ----------------------------------------------
     public String toString(){
-        return "joueur "+this.playerNumber;
+        String str = "player "+this.playerNumber;
+        return str;
     }
-
 }
