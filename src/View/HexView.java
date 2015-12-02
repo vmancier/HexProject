@@ -57,7 +57,6 @@ public class HexView implements Observer, ActionListener {
         hexFrame.add(menuPanel);    //adding it to the frame
         mainPanel = createGamePanel(model);    //the creating the game panel
 
-
         mainPanel.addMouseListener(new MouseAdapter() { //adding a mouse listener on the game panel
             @Override
             public void mouseClicked(MouseEvent arg0) { //listening only the clicks
@@ -76,6 +75,7 @@ public class HexView implements Observer, ActionListener {
                         }
                     }
                 }
+
                 mainPanel.repaint();    //refreshing the game panel
             }
         });
