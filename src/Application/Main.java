@@ -23,7 +23,7 @@ public class Main {
     // Launches the GUI creation task
     // ----------------------------------------------
     public static void main(String args[]) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        javax.swing.SwingUtilities.invokeLater(new Runnable() { //all the modifications will be done by the same thread
             public void run() {
                 new Main();
             }

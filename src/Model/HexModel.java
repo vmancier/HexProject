@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Created by Valentin on 14/10/2015.
+ * Created by Eliott and Valentin on 14/10/2015.
  */
 
 import Application.Entities;
@@ -24,6 +24,9 @@ public class HexModel extends Observable {
         initModel();
     }
 
+    // -- initModel ---------------------------------
+    // Initializes the model
+    // ----------------------------------------------
     public void initModel() {
         player1.initPlayer();
         player2.initPlayer();
@@ -31,6 +34,12 @@ public class HexModel extends Observable {
         gridHex = new Grid();
     }
 
+    // -- groupCells --------------------------------
+    // Initializes the model
+    // * in-parameters :
+    // - "r", int : column's index
+    // - "c", int : row's index
+    // ----------------------------------------------
     public void groupCells(int r, int c) {
         if (nbNextToCell(gridHex.getMatrix()[r][c]) > 0) {// si la cellule a des voisins
             if (nbNextToCell(gridHex.getMatrix()[r][c]) == 1) {//s'il n'y a qu'un seul voisin
@@ -84,6 +93,13 @@ public class HexModel extends Observable {
         }
     }
 
+    // -- nbNextToCell ------------------------------
+    // Searches closes cells of a cell
+    // * in-parameters :
+    // - "c", Cell : the method will be searching for closes cell of this cell "c"
+    // * out-parameters :
+    // - "nbCellsClose", int : number of cells close to the starting cell "c"
+    // ----------------------------------------------
     public int nbNextToCell(Cell c) {
         int nbCellsClose = 0;
         for (ArrayList<Cell> co : currentPlayer.getBlocks()) {
@@ -102,6 +118,11 @@ public class HexModel extends Observable {
     }
 
 
+    // -- victory -----------------------------------
+    // Determines if a player won or not
+    // * out-parameters :
+    // - "win", boolean : true if the player has won, false on the contrary
+    // ----------------------------------------------
     public boolean victory() {
         boolean win = false;
         boolean start = false;
