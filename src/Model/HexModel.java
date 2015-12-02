@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Created by Valentin on 14/10/2015.
+ * Created by Eliott and Valentin on 14/10/2015.
  */
 
 import Application.Entities;
@@ -24,6 +24,9 @@ public class HexModel extends Observable {
         initModel();
     }
 
+    // -- initModel ---------------------------------
+    // Initializes the model
+    // ----------------------------------------------
     public void initModel() {
         player1.initPlayer();
         player2.initPlayer();
@@ -31,6 +34,12 @@ public class HexModel extends Observable {
         gridHex = new Grid();
     }
 
+    // -- groupCells --------------------------------
+    // Initializes the model
+    // * in-parameters :
+    // - "r", int : column's index
+    // - "c", int : row's index
+    // ----------------------------------------------
     public void groupCells(int r, int c) {
         if (nbNextToCell(gridHex.getMatrix()[r][c]) > 0) {
             if (nbNextToCell(gridHex.getMatrix()[r][c]) == 1) {
@@ -41,17 +50,16 @@ public class HexModel extends Observable {
                                 && cell.getCenterX() > gridHex.getMatrix()[r][c].getCenterX() - 2 * Entities.CELL_SIZE
                                 && cell.getCenterY() < gridHex.getMatrix()[r][c].getCenterY() + 2 * Entities.CELL_SIZE
                                 && cell.getCenterY() > gridHex.getMatrix()[r][c].getCenterY() - 2 * Entities.CELL_SIZE) {
-
                             found = true;
                         }
                     }
-                    if (found == true) {
+                    if (found) {
                         co.add(gridHex.getMatrix()[r][c]);
                     }
                 }
             } else {
-                ArrayList<Cell> cellPile = new ArrayList<Cell>();
-                ArrayList<ArrayList<Cell>> basketArray = new ArrayList<ArrayList<Cell>>();
+                ArrayList<Cell> cellPile = new ArrayList<>();
+                ArrayList<ArrayList<Cell>> basketArray = new ArrayList<>();
                 boolean found = false;
                 for (ArrayList<Cell> co : currentPlayer.getBlocks()) {
                     for (Cell cell : co) {
@@ -63,7 +71,7 @@ public class HexModel extends Observable {
                             found = true;
                         }
                     }
-                    if (found == true) {
+                    if (found) {
                         cellPile.addAll(co);
                         basketArray.add(co);
                     }
@@ -75,12 +83,19 @@ public class HexModel extends Observable {
                 currentPlayer.getBlocks().add(cellPile);
             }
         } else {
-            ArrayList<Cell> cells = new ArrayList<Cell>();
+            ArrayList<Cell> cells = new ArrayList<>();
             cells.add(gridHex.getMatrix()[r][c]);
             currentPlayer.getBlocks().add(cells);
         }
     }
 
+    // -- nbNextToCell ------------------------------
+    // Searches closes cells of a cell
+    // * in-parameters :
+    // - "c", Cell : the method will be searching for closes cell of this cell "c"
+    // * out-parameters :
+    // - "nbCellsClose", int : number of cells close to the starting cell "c"
+    // ----------------------------------------------
     public int nbNextToCell(Cell c) {
         int nbCellsClose = 0;
         for (ArrayList<Cell> co : currentPlayer.getBlocks()) {
@@ -98,6 +113,11 @@ public class HexModel extends Observable {
         return nbCellsClose;
     }
 
+    // -- victory -----------------------------------
+    // Determines if a player won or not
+    // * out-parameters :
+    // - "win", boolean : true if the player has won, false on the contrary
+    // ----------------------------------------------
     public boolean victory() {
         boolean win = false;
         boolean start = false;

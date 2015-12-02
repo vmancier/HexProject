@@ -5,7 +5,7 @@ import Application.Entities;
 import java.awt.*;
 
 /**
- * Created by Eliott on 14/10/2015.
+ * Created by Eliott and Valentin on 14/10/2015.
  */
 public class Cell extends Polygon {
     private int posX;   //horizontal position of the cell
@@ -13,8 +13,8 @@ public class Cell extends Polygon {
     private int centerX;    //horizontal position of the cell's center
     private int centerY;    //vertical position of the cell's center
     private Color color;    //color of the cell
-    double arc = (Math.PI * 2) / 6; //
-    double rad; //
+    double arc = (Math.PI * 2) / 6; //used to build the cell's polygon
+    double rad; //used to build the cell's polygon
 
     // -- Cell --------------------------------------
     // Creates a new cell
@@ -31,14 +31,20 @@ public class Cell extends Polygon {
         this.centerY = centY;
         this.rad = Entities.CELL_SIZE;
         this.color = Entities.EMPTY_COLOR;
+        buildPolygon();
+    }
 
+    // -- buildPolygon ------------------------------
+    // Builds the polygon representing the cell
+    // ----------------------------------------------
+    public void buildPolygon() {
         for (int i = 0; i <= 6; i++) {  //creates each side of the polygon
             this.addPoint((int) Math.round(centerX + rad * Math.cos(arc * i)),
                     (int) Math.round(centerY + rad * Math.sin(arc * i)));
         }
     }
 
-    // -- getPosX------------------------------------
+    // -- getPosX -----------------------------------
     // Returns the horizontal position of the cell
     // * out-parameters :
     // - "posX", int : the horizontal position of the cell
@@ -72,20 +78,6 @@ public class Cell extends Polygon {
     // ----------------------------------------------
     public int getCenterY() {
         return centerY;
-    }
-
-    // -- setCenterX --------------------------------
-    // Sets the horizontal position of the cell's center
-    // ----------------------------------------------
-    public void setCenterX(int centerX) {
-        this.centerX = centerX;
-    }
-
-    // -- setCenterY --------------------------------
-    // Sets the vertical position of the cell's center
-    // ----------------------------------------------
-    public void setCenterY(int centerY) {
-        this.centerY = centerY;
     }
 
     // -- getColor ----------------------------------

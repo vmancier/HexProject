@@ -34,14 +34,9 @@ public class HexController {
     // ----------------------------------------------
     public static void switchPlayer() {
         if (HexModel.getCurrentPlayer() == HexModel.getPlayer1()) { //if the player 1 is the one currently playing
-            HexModel.getPlayer1().setIsPlaying(false);
             HexModel.setCurrentPlayer(HexModel.getPlayer2());   //then switch to player 2
-            HexModel.getPlayer2().setIsPlaying(true);
-        }
-        else {    //else means that the player 2 is the one currently playing
-            HexModel.getPlayer2().setIsPlaying(false);
+        } else {    //else means that the player 2 is the one currently playing
             HexModel.setCurrentPlayer(HexModel.getPlayer1()); //then switch to player 1
-            HexModel.getPlayer1().setIsPlaying(true);
         }
     }
 

@@ -1,7 +1,7 @@
 package View;
 
 /**
- * Created by Valentin on 14/10/2015.
+ * Created by Eliott and Valentin on 14/10/2015.
  */
 
 import Application.Entities;
@@ -71,7 +71,7 @@ public class HexView implements Observer, ActionListener {
                                 hexFrame.add(victoryPanel);
                                 victoryPanel.setVisible(true);
                             }
-                            controller.switchPlayer();  //and switching of player
+                            controller.switchPlayer();  //switching of player
                         }
                     }
                 }
@@ -216,17 +216,6 @@ public class HexView implements Observer, ActionListener {
         }
     }
 
-    // -- update -----------------------------------
-    // Called whenever the observed object is changed
-    // * in-parameters :
-    // - "o", Observable : the observable object
-    // - "arg", Object : an argument passed to the notifyObservers method
-    // ---------------------------------------------
-    @Override   //needs to be override since HewView implements Observe
-    public void update(Observable o, Object arg) {
-
-    }
-
     // -- createVictoryPanel ------------------------
     // Creates the victory's panel
     // * out-parameters :
@@ -238,7 +227,7 @@ public class HexView implements Observer, ActionListener {
         victoryP.setBackground(Entities.PLAYER2_COLOR);
         victoryP.setLayout(null);
 
-        JLabel titleL1 = new JLabel("Victoire du " + model.getCurrentPlayer().toString());
+        JLabel titleL1 = new JLabel("Victory of " + model.getCurrentPlayer().toString());
         titleL1.setFont(new Font("Verdana", 1, 40));
         titleL1.setBounds(Entities.WINDOW_WIDTH / 2 - titleL1.getPreferredSize().width / 2, 100, 500, 50);
 
@@ -253,5 +242,16 @@ public class HexView implements Observer, ActionListener {
         victoryP.add(nextB);
 
         return victoryP;
+    }
+
+    // -- update -----------------------------------
+    // Called whenever the observed object is changed
+    // * in-parameters :
+    // - "o", Observable : the observable object
+    // - "arg", Object : an argument passed to the notifyObservers method
+    // ---------------------------------------------
+    @Override   //needs to be override since HewView implements Observe
+    public void update(Observable o, Object arg) {
+
     }
 }
