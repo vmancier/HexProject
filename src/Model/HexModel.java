@@ -64,7 +64,7 @@ public class HexModel extends Observable {
                     }
                     if (found == true) {
                         cellPile.addAll(co);
-                        co.clear();
+                        //co.clear();
                     }
                 }
                 currentPlayer.getBlocks().add(cellPile);
