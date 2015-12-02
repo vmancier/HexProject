@@ -6,7 +6,6 @@ package Model;
 
 import Application.Entities;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -25,7 +24,7 @@ public class HexModel extends Observable {
         initModel();
     }
 
-    public void initModel(){
+    public void initModel() {
         player1.initPlayer();
         player2.initPlayer();
         currentPlayer = player1;    //the player 1 is the first to play
@@ -75,8 +74,7 @@ public class HexModel extends Observable {
                 cellPile.add(gridHex.getMatrix()[r][c]);
                 currentPlayer.getBlocks().add(cellPile);
             }
-        }
-        else {
+        } else {
             ArrayList<Cell> cells = new ArrayList<Cell>();
             cells.add(gridHex.getMatrix()[r][c]);
             currentPlayer.getBlocks().add(cells);
@@ -87,11 +85,13 @@ public class HexModel extends Observable {
         int nbCellsClose = 0;
         for (ArrayList<Cell> co : currentPlayer.getBlocks()) {
             for (Cell cell : co) {
-                if (cell.getCenterX() < c.getCenterX() + 2 * Entities.CELL_SIZE
-                        && cell.getCenterX() > c.getCenterX() - 2 * Entities.CELL_SIZE
-                        && cell.getCenterY() < c.getCenterY() + 2 * Entities.CELL_SIZE
-                        && cell.getCenterY() > c.getCenterY() - 2 * Entities.CELL_SIZE) {
-                    nbCellsClose++;
+                if (cell != c) {
+                    if (cell.getCenterX() < c.getCenterX() + 2 * Entities.CELL_SIZE
+                            && cell.getCenterX() > c.getCenterX() - 2 * Entities.CELL_SIZE
+                            && cell.getCenterY() < c.getCenterY() + 2 * Entities.CELL_SIZE
+                            && cell.getCenterY() > c.getCenterY() - 2 * Entities.CELL_SIZE) {
+                        nbCellsClose++;
+                    }
                 }
             }
         }

@@ -7,6 +7,7 @@ import Model.HexModel;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.omg.CORBA.OBJECT_NOT_EXIST;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,39 @@ public class HexModelTest {
 
     @Test
     public void testGroupCells() throws Exception {
+        hmTest.initModel();
+        ArrayList<Cell> cells = new ArrayList<Cell>();
 
+        System.out.print(hmTest.getCurrentPlayer().getBlocks().size());
+
+        hcTest.changeCellColor(3, 3);
+        cells.add(hmTest.getGridHex().getMatrix()[3][3]);
+        hmTest.groupCells(3, 3);
+        Assert.assertEquals(1, hmTest.getCurrentPlayer().getBlocks().size());
+
+        cells.add(hmTest.getGridHex().getMatrix()[4][2]);
+        hmTest.groupCells(4, 2);
+        Assert.assertEquals(1, hmTest.getCurrentPlayer().getBlocks().size());
+
+        cells.add(hmTest.getGridHex().getMatrix()[4][3]);
+        hmTest.groupCells(4, 3);
+        Assert.assertEquals(1, hmTest.getCurrentPlayer().getBlocks().size());
+
+        cells.add(hmTest.getGridHex().getMatrix()[3][4]);
+        hmTest.groupCells(3, 4);
+        Assert.assertEquals(1, hmTest.getCurrentPlayer().getBlocks().size());
+
+        cells.add(hmTest.getGridHex().getMatrix()[2][4]);
+        hmTest.groupCells(2, 4);
+        Assert.assertEquals(1, hmTest.getCurrentPlayer().getBlocks().size());
+
+        cells.add(hmTest.getGridHex().getMatrix()[2][3]);
+        hmTest.groupCells(2, 3);
+        Assert.assertEquals(1, hmTest.getCurrentPlayer().getBlocks().size());
+
+        cells.add(hmTest.getGridHex().getMatrix()[3][2]);
+        hmTest.groupCells(3, 2);
+        Assert.assertEquals(1, hmTest.getCurrentPlayer().getBlocks().size());
     }
 
     @Test
@@ -34,8 +67,10 @@ public class HexModelTest {
         hmTest.initModel();
         ArrayList<Cell> cells = new ArrayList<Cell>();
 
+        hcTest.changeCellColor(3, 3);
         cells.add(hmTest.getGridHex().getMatrix()[3][3]);
         hmTest.getCurrentPlayer().getBlocks().add(cells);
+        int test = hmTest.nbNextToCell(hmTest.getGridHex().getMatrix()[3][3]);
         Assert.assertEquals(0, hmTest.nbNextToCell(hmTest.getGridHex().getMatrix()[3][3]));
 
         cells.add(hmTest.getGridHex().getMatrix()[4][2]);
