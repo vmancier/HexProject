@@ -23,20 +23,20 @@ public class HexControllerTest {
 
     @Test
     public void testSwitchPlayer() throws Exception {
-        Assert.assertEquals(HexModel.getPlayer1(), HexModel.getCurrentPlayer());
+        Assert.assertEquals(hmTest.getPlayer1(), hmTest.getCurrentPlayer());
         hcTest.switchPlayer();
-        Assert.assertEquals(HexModel.getPlayer2(), HexModel.getCurrentPlayer());
+        Assert.assertEquals(hmTest.getPlayer2(), hmTest.getCurrentPlayer());
         hcTest.switchPlayer();
-        Assert.assertEquals(HexModel.getPlayer1(), HexModel.getCurrentPlayer());
+        Assert.assertEquals(hmTest.getPlayer1(), hmTest.getCurrentPlayer());
     }
 
     @Test
     public void testChangeCellColor() throws Exception {
         for (int i = 0; i < Entities.ROWS_NUMBER; i++) {
             for (int j = 0; j < Entities.COLUMNS_NUMBER; j++) {
-                Assert.assertEquals(hmTest.getGridHex().getMatrix()[i][j].getColor(), Entities.EMPTY_COLOR);
+                Assert.assertEquals(Entities.EMPTY_COLOR, hmTest.getGridHex().getMatrix()[i][j].getColor());
                 hcTest.changeCellColor(i, j);
-                Assert.assertEquals(hmTest.getGridHex().getMatrix()[i][j].getColor(), HexModel.getCurrentPlayer().getColor());
+                Assert.assertEquals(hmTest.getCurrentPlayer().getColor(), hmTest.getGridHex().getMatrix()[i][j].getColor());
                 hcTest.switchPlayer();
             }
         }
