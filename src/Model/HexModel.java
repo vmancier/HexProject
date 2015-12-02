@@ -6,6 +6,7 @@ package Model;
 
 import Application.Entities;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -51,6 +52,7 @@ public class HexModel extends Observable {
                 }
             } else {
                 ArrayList<Cell> cellPile = new ArrayList<Cell>();
+                ArrayList<ArrayList<Cell>> basketArray = new ArrayList<ArrayList<Cell>>();
                 boolean found = false;
                 for (ArrayList<Cell> co : currentPlayer.getBlocks()) {
                     for (Cell cell : co) {
@@ -64,12 +66,17 @@ public class HexModel extends Observable {
                     }
                     if (found == true) {
                         cellPile.addAll(co);
-                        //co.clear();
+                        basketArray.add(co);
                     }
                 }
+                for (ArrayList<Cell> co : basketArray) {
+                    currentPlayer.getBlocks().remove(co);
+                }
+                cellPile.add(gridHex.getMatrix()[r][c]);
                 currentPlayer.getBlocks().add(cellPile);
             }
-        } else {
+        }
+        else {
             ArrayList<Cell> cells = new ArrayList<Cell>();
             cells.add(gridHex.getMatrix()[r][c]);
             currentPlayer.getBlocks().add(cells);
