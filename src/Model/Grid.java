@@ -24,9 +24,9 @@ public class Grid {
     public void createGrid(){
         for (int i = 0; i < rows; i++) {    //for each row in the grid
             for (int j = 0; j < columns; j++) {     //and for each column
-                matrix[i][j] = new Cell(i, j,   //a cell is created and added to the matrix
-                        Entities.ROW_POS_X * i + Entities.COLUMN_POS_X * j + Entities.GRID_POS_X,
-                        Entities.COLUMN_POS_Y * j + Entities.ROW_POS_Y * i + Entities.GRID_POS_Y);
+                matrix[i][j] = new Cell(i, j,
+                        Entities.ROW_POS_X * i + Entities.COLUMN_POS_X * j + Entities.GRID_POS_X - Entities.WINDOW_WIDTH/10,    //a cell is created and added to the matrix
+                        Entities.COLUMN_POS_Y * j + Entities.ROW_POS_Y * i + Entities.GRID_POS_Y + Entities.WINDOW_HEIGHT/10);
             }
         }
     }

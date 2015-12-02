@@ -84,7 +84,6 @@ public class HexModel extends Observable {
                         && cell.getCenterX() > c.getCenterX() - 2 * Entities.CELL_SIZE
                         && cell.getCenterY() < c.getCenterY() + 2 * Entities.CELL_SIZE
                         && cell.getCenterY() > c.getCenterY() - 2 * Entities.CELL_SIZE) {
-
                     nbCellsClose++;
                 }
             }
